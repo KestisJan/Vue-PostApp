@@ -13,6 +13,14 @@
                     <span>Authors</span>
                 </router-link>
             </li>
+            <li>
+                <router-link to="/posts" class="breadcrumb-item">
+                    <span class="icon is-small">
+                        <i class="fas fa-newspaper"></i>
+                    </span>
+                    <span>Posts</span>
+                </router-link>
+            </li>
         </ul>
     </nav>
 </template>
