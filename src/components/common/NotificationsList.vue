@@ -27,7 +27,7 @@ const notifications = computed(() => notificationStore.notifications);
     >
       <div class="notification-content">
         <div class="icon-container">
-          <span class="icon is-large">
+          <span class="icon is-small">
             <i 
               :class="{
                 'fas': true,
@@ -35,7 +35,7 @@ const notifications = computed(() => notificationStore.notifications);
                 'fa-exclamation-circle': notification.type === 'danger',
                 'fa-check-circle': notification.type === 'success'
               }"
-              class="fa-3x"
+              class="fa-2x"
             ></i>
           </span>
         </div>
