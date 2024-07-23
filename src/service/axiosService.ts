@@ -12,6 +12,7 @@ export default {
     async fetchData (endpoint: string, params?: { [key: string ]: any}) {
         try {
 
+            // Pagination
             if (params?.paginationPage !== undefined && params?.paginationLimit !== undefined) {
                 params._page = params.paginationPage;
                 params._limit = params.paginationLimit;
@@ -19,7 +20,12 @@ export default {
                 delete params.paginationLimit;
             }
 
-            
+            // Search query
+            if (params?.query !== undefined) {
+                params.q = params.query;
+                delete params.query;
+            }
+
             const response = await axios.get(endpoint, { params });
     
             let totalCount = response.data.length
