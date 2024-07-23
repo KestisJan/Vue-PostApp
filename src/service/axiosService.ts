@@ -11,6 +11,15 @@ const handleError = (err: any) => {
 export default {
     async fetchData (endpoint: string, params?: { [key: string ]: any}) {
         try {
+
+            if (params?.paginationPage !== undefined && params?.paginationLimit !== undefined) {
+                params._page = params.paginationPage;
+                params._limit = params.paginationLimit;
+                delete params.paginationPage;
+                delete params.paginationLimit;
+            }
+
+            
             const response = await axios.get(endpoint, { params });
     
             let totalCount = response.data.length
