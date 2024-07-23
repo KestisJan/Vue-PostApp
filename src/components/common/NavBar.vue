@@ -21,6 +21,14 @@
                     <span>Posts</span>
                 </router-link>
             </li>
+            <li>
+                <router-link to="/login">
+                    <span class="icon is-small">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    <span>Login</span>
+                </router-link>
+            </li>
         </ul>
     </nav>
 </template>
