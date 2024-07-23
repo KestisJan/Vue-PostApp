@@ -10,22 +10,28 @@ export const usePostsStore = defineStore('posts-store', () => {
     const notificationStore = useNotificationStore()
     const posts = ref<IPost[]>([])
 
-    const fetchPosts = async (page: number, limit: number) => {
+    const fetchPosts = async (page: number, limit: number, query?: string) => {
         try {
-            const response = await axiosService.fetchData('/posts', {
+            const params: { [key: string]: any } = {
                 _page: page,
                 _limit: limit
-            });
+            }
+
+            if (query) {
+                params.q = query;
+            }
+           
+            const response = await axiosService.fetchData('/posts', params);
 
             if (response) {
                 posts.value = response.data
             }
             
-            notificationStore.success('Success fetching data!')
-            return response
+            notificationStore.success('Success fetching data!');
+            return response;
         } catch (err: any) {
-            notificationStore.warning('Error fetching data:' + err)
-            console.error(err)
+            notificationStore.warning('Error fetching data:' + err.message);
+            console.error(err);
             throw err;
         }
     }

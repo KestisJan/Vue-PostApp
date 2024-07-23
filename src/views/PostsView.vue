@@ -4,15 +4,15 @@ import { type IPost } from '@/interface/IPost';
 import { ref } from 'vue'
 import PostCard from '@/components/posts/PostsCard.vue'
 import Pagination from '@/components/common/Pagination.vue';
-
+import Search from '@/components/common/Search.vue';
 
 const postsStore = usePostsStore()
 const posts = ref<IPost[]>([]);
 const isLoading = ref(true)
 const currentPage = ref(1)
 const itemsPerPage = ref(5)
-
 const itemCount = ref(0);
+const query = ref('')
 
 const loadData = async (page: number, limit: number) => {
     isLoading.value = true
@@ -21,7 +21,8 @@ const loadData = async (page: number, limit: number) => {
     try {
         const response = await postsStore.fetchPosts(
             currentPage.value,
-            itemsPerPage.value
+            itemsPerPage.value,
+            query.value
         );
 
         if (response) {
@@ -29,7 +30,6 @@ const loadData = async (page: number, limit: number) => {
             itemCount.value = response.totalCount
         }
 
-        console.log(response);
     } catch (err: any) {
         console.error('Error loading data:', err);
     } finally {
@@ -46,6 +46,13 @@ const handlePagination = ({ page, limit}: { page:number; limit: number}) => {
     }, 50)
 }
 
+const handleSearch = (searchParams: { [key: string]: string }) => {
+    query.value = searchParams;
+    currentPage.value = 1
+    loadData(currentPage.value, itemsPerPage.value, query.value)
+}
+
+
 
 
 loadData()
@@ -53,6 +60,7 @@ loadData()
 </script>
 
 <template>
+    <Search @search="handleSearch" />
     <PostCard :posts="posts"/>
     <Pagination 
         :total-items="itemCount"
