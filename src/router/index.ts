@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AuthorsView from '@/views/AuthorsView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import PostsView from '@/views/PostsView.vue'
+import SinglePostView from '@/views/SinglePostView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/posts',
       name: 'posts',
       component: PostsView
+    },
+    {
+      path: '/posts/:id',
+      name: 'singlepost',
+      component: SinglePostView
     },
     {
       path: '/:catchAll(.*)',

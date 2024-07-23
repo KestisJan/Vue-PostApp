@@ -25,8 +25,23 @@ export const usePostsStore = defineStore('posts-store', () => {
         }
     }
 
+    const getPostWithAuthor = async(id: number): Promise<IPostAuthor| null> => {
+        try {
+            const response = await axiosService.fetchDataWithAuthor('/posts', id)
+            if (response) {
+                notificationStore.success('Success fetching data!')
+                return response
+            }
+        } catch (err: any) {
+            notificationStore.warning('Error fetching data:' + err)
+            console.error(err)
+            throw(err)
+        }
+    }
+
     return {
         posts: readonly(posts),
-        fetchPosts
+        fetchPosts,
+        getPostWithAuthor
     }
 })

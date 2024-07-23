@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import {defineProps} from 'vue'
 import { type IPost } from '@/interface/IPost';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const props = defineProps<{
     posts: IPost[]
 }>();
+
+const postDetails = (id: number) => {
+    if (id) router.push('/posts/' + id)
+}
 
 
 const formatDate = (dateString: string): string => {
@@ -23,6 +30,7 @@ const formatDate = (dateString: string): string => {
                 <div v-for="post in posts" class="box" style="width: 100%; height: 100%; max-width: 500px;">
                     <div class="card-header">
                         <p class="title is-5">{{ post.title }}</p>
+                        <button class="button" @click="postDetails(post.id)">Details</button>
                         <span v-if="post.updated_at && post.created_at && post.updated_at > post.created_at">
                             Updated: {{ formatDate(post.updated_at) }}
                         </span>
