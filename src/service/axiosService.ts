@@ -28,6 +28,17 @@ export default {
             handleError(err);
             throw err;
         }
+    },
+
+
+    async fetchDataWithAuthor(endpoint: string,  id: number) {
+        try {
+            const response = await axios.get(`${endpoint}/${id}?_expand=author`)
+            return response.data
+        } catch (err: any) {
+            handleError(err);
+            throw err;
+        }
     }
 
 } 
