@@ -8,7 +8,6 @@ const password = ref('')
 const currentUser = useCurrentUserStore()
 const router = useRouter()
 const validationMessage = ref<string[]>([]);
-const emit = defineEmits(['close'])
 
 
 const login = async () => {
@@ -20,7 +19,6 @@ const login = async () => {
         router.push('/').then(() => {
             window.location.reload()
         });
-        emit('close')
     }
 
 }
@@ -93,10 +91,13 @@ const validate = () => {
                     </div>
                 </div>
                 <div class="field">
-                    <button class="button is-fullwidth">
+                    <button class="button is-fullwidth" @click="login">
                         <i class="fas fa-sign-in-alt"></i>
                         Login
                     </button>
+                    <ul v-if="validationMessage.length">
+                        <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+                    </ul>
                 </div>
             </form>
             <div class="field-bot">

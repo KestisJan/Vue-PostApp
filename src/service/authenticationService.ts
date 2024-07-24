@@ -2,6 +2,7 @@ import axios from "axios";
 import { type ILoginRequest} from "@/interface/ILogin";
 import { type ILoginResponse } from "@/interface/ILogin";
 import { type IUser } from "@/interface/IUser";
+import type { IRegisterRequest } from "@/interface/IRegister";
 
 
 axios.defaults.baseURL = 'http://localhost:3000';
@@ -61,6 +62,27 @@ export default {
 
     },
 
+
+    async register(registerRequest: IRegisterRequest): Promise<string> {
+        try {
+            const response = await axios.post<string>('/register', registerRequest, {
+                headers: {'Content-Type': 'application/json'}
+            })
+
+            if (!response || !response.data) {
+                console.error('Failed to login. No response or empty response data.')
+                throw new Error('Failed to login. No response or empty response data.')
+            }
+
+            return response.data;
+        } catch (err: any) {
+            console.error('Login failed:', err?.response || err);
+            throw Error (
+                `Failed to login. Status: ${err?.response?.status || 'unknown'} ${err?.response?.statusText || ''}. Message: ${err?.response?.data || err.message}`
+            )
+        }
+    }, 
+
     async getUserById(id: number): Promise<IUser | null> {
         if (!localStorage.getItem('currentUser')) {
             console.error("Can't fetch use while not logged in");
@@ -78,6 +100,12 @@ export default {
             );
         }
 
+    },
+
+    isLoggedIn(): boolean {
+        if (localStorage.getItem('jwtToken')) return true
+
+        return false
     },
 
     async logout() {
