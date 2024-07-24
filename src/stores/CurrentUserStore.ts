@@ -5,6 +5,7 @@ import { ref, readonly } from 'vue'
 import { useNotificationStore } from "./NotificationStore";
 import { jwtDecode } from 'jwt-decode'
 import authenticationService from "@/service/authenticationService";
+import type { IRegisterRequest } from "@/interface/IRegister";
 
 
 export const useCurrentUserStore = defineStore('current-user-store', () => {
@@ -90,6 +91,32 @@ export const useCurrentUserStore = defineStore('current-user-store', () => {
         }
       };
 
+      const register = async (email: string, password: string, name: string) => {
+        try {
+          if (!email || !password || !name) {
+            throw Error('Failed to login invalid email. password, name')
+          }
+
+          const registerRequest: IRegisterRequest = {
+            email,
+            password,
+            name
+          }
+
+          const response: string = await authenticationService.register(registerRequest)
+
+          if (!response) {
+            throw Error('Failed to register: no token received from request.')
+          }
+
+          notificationStore.success('Successfully registered.')
+          return true 
+        } catch (err: any) {
+          notificationStore.warning('Failed to register: ' + err.message)
+          return false
+        }
+      }
+
       const getUserById = async (id: number) => {
         try {
           return await authenticationService.getUserById(id)
@@ -112,7 +139,9 @@ export const useCurrentUserStore = defineStore('current-user-store', () => {
         currentUser: readonly(currentUser),
         reload,
         login,
-        getUserById
+        getUserById,
+        register,
+        logout
       }
 
 

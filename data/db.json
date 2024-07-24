@@ -5,6 +5,12 @@
       "password": "$2a$10$wrSOb2J7qq1QDNmovvT34OIReYBv6aTvD9gnb6BzsGy5AY.yAGBru",
       "name": "Regular user",
       "id": 1
+    },
+    {
+      "email": "ben@gmail.com",
+      "password": "$2a$10$yHbh/ccYsWVsSwY47Iax4uAvNwvXlhtQYFsi27CNMgu5VpqJBbdau",
+      "name": "Ben",
+      "id": 2
     }
   ],
   "authors": [
