@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import PostCard from '@/components/posts/PostsCard.vue'
 import Pagination from '@/components/common/Pagination.vue';
 import Search from '@/components/common/Search.vue';
+import Modal from '@/components/common/Modal.vue';
 
 const postsStore = usePostsStore()
 const posts = ref<IPost[]>([]);
@@ -13,6 +14,13 @@ const currentPage = ref(1)
 const itemsPerPage = ref(5)
 const itemCount = ref(0);
 const query = ref('')
+let showModal = ref(false);
+const postData = ref({ title: '', content: ''})
+
+const openModal = (post = { title: '', content: '' }) => {
+    postData.value = {...post};
+    showModal.value = true
+}
 
 const loadData = async (page: number, limit: number) => {
     isLoading.value = true
@@ -60,11 +68,18 @@ loadData()
 </script>
 
 <template>
+    <button @click="openModal">Open Modal</button>
     <Search @search="handleSearch" />
     <PostCard :posts="posts"/>
     <Pagination 
         :total-items="itemCount"
         @update="handlePagination"
+    />
+    <Modal
+        :show="showModal" 
+        :formData="postData"
+        formType="create"
+        @close="showModal = false"
     />
 </template>
 
