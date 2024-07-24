@@ -90,9 +90,30 @@ export const useCurrentUserStore = defineStore('current-user-store', () => {
         }
       };
 
+      const getUserById = async (id: number) => {
+        try {
+          return await authenticationService.getUserById(id)
+        } catch (err: any) {
+          console.error('Error getting user: ', err.message);
+          return null
+        }
+      };
+
+      const logout = async () => {
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('currentUser');
+        currentUser.value = null;
+        window.location.reload()
+        notificationStore.warning('Logged out')
+      }
 
 
-
+      return {
+        currentUser: readonly(currentUser),
+        reload,
+        login,
+        getUserById
+      }
 
 
 
