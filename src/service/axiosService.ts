@@ -45,6 +45,15 @@ export default {
         }
     },
 
+    async getData(endpoint: string, id: number) {
+        try {
+            const response = await axios.get(`${endpoint}/${id}`)
+            return response.data
+        } catch (err: any) {
+            console.error('Error getting author:', err)
+            throw err
+        }
+    },
 
     async fetchDataWithAuthor(endpoint: string,  id: number) {
         try {

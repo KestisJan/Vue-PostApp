@@ -32,6 +32,16 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
     }
 
+    const getAuthor = async (id: number): Promise<IAuthor | null> => {
+        try {
+            const response = axiosService.getData('authors', id) 
+            return response ? (response as IAuthor) : null
+        } catch (err: any) {
+            console.error('Error getting author: ', err)
+            throw err
+        }
+    }
+
     const addAuthor = async (name: string, surname: string) => {
         const currentUserStore = useCurrentUserStore()
 
@@ -81,6 +91,7 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         authors: readonly(authors),
         fetchAuthors,
         addAuthor,
-        updateAuthor
+        updateAuthor,
+        getAuthor
     }
 });
