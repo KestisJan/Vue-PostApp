@@ -1,28 +1,22 @@
 <script setup lang="ts">
-defineProps({
-    show: Boolean,
-});
+import { useModalStore } from '@/stores/ModalStore';
+import { computed } from 'vue'
 
-const emit = defineEmits(['close', 'save']);
-
+const modalStore = useModalStore()
+const isVisible = computed(() => modalStore.modalState.component !== null)
 
 
 </script>
 
 <template>
-    <div v-if="show" class="modal-mask">
+    <div v-if="isVisible" class="modal-mask">
         <div class="modal-container">
-            <div class="field">
-                <slot name="form">
-                </slot>
-            </div>
-            <hr/>
-            <footer>
-                <slot name="footer">
-                    <button @click="$emit('close')">Close</button>
-                    <button @click="$emit('save')">Save</button>
-                </slot>
-            </footer>
+            <button @click="modalStore.closeModal">x</button>
+            <component 
+                :is="modalStore.modalState?.component"
+                v-bind="modalStore.modalState?.props"
+                @close="modalStore.closeModal"
+            ></component>
         </div>
     </div>
 </template>

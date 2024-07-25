@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { usePostsStore } from '@/stores/PostStore'
+import { useModalStore } from '@/stores/ModalStore';
 import { type IPost } from '@/interface/IPost';
+import { type IModalProps } from '@/interface/IModal';
 import { ref } from 'vue'
 import PostCard from '@/components/posts/PostsCard.vue'
 import Pagination from '@/components/common/Pagination.vue';
@@ -8,18 +10,17 @@ import Search from '@/components/common/Search.vue';
 import Modal from '@/components/common/Modal.vue';
 
 const postsStore = usePostsStore()
+const modalStore = useModalStore()
 const posts = ref<IPost[]>([]);
 const isLoading = ref(true)
 const currentPage = ref(1)
 const itemsPerPage = ref(5)
 const itemCount = ref(0);
 const query = ref('')
-let showModal = ref(false);
-const postData = ref({ title: '', content: ''})
 
-const openModal = (post = { title: '', content: '' }) => {
-    postData.value = {...post};
-    showModal.value = true
+const openModal = (post: IPost | null = null) => {
+ 
+
 }
 
 const loadData = async (page: number, limit: number) => {
@@ -80,7 +81,9 @@ loadData()
         :formData="postData"
         formType="create"
         @close="showModal = false"
-    />
+    >
+       
+    </Modal>
 </template>
 
 
