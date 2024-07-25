@@ -46,10 +46,10 @@ const clearSearch = () => {
                type="text"
                placeholder="Search..."
                maxlength="200"
+               @input="handleSearch"
             />
         </div>
         <button @click="clearSearch">Clear</button>
-        <button @click="handleSearch">Search</button>
     </div>
 </div>    
 </template>

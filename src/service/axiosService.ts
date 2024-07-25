@@ -54,6 +54,19 @@ export default {
             handleError(err);
             throw err;
         }
+    },
+
+    async postData(endpoint: string, data: any) {
+        try {
+            const response = await axios.post(endpoint, JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response.data
+        } catch (err: any) {
+            return handleError(err)
+        }
     }
 
 } 
