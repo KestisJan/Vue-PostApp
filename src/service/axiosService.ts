@@ -67,7 +67,23 @@ export default {
         } catch (err: any) {
             return handleError(err)
         }
+    },
+
+
+    async updateData(endpoint: string, id: number, data: any) {
+        try {
+            const response = await axios.patch(`${endpoint}/${id}`, JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response.data
+        } catch (err: any) {
+            return handleError(err)
+        }
     }
+
+
 
 } 
     
