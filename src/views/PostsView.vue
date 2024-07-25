@@ -58,7 +58,7 @@ const handlePagination = ({ page, limit}: { page:number; limit: number}) => {
 const handleSearch = (searchParams: { [key: string]: string }) => {
     query.value = searchParams;
     currentPage.value = 1
-    loadData(currentPage.value, itemsPerPage.value, query.value)
+    loadData(currentPage.value, itemsPerPage.value)
 }
 
 

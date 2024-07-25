@@ -5,7 +5,6 @@ import { markRaw, readonly, ref, type Component } from 'vue'
 
 export const useModalStore = defineStore('modal-store', () => {
     const state = ref<IModalProps>({ component: null, props: {} })
-
     const openModal = (payload: IModalProps) => {
         const component: Component | null = payload?.component
             ? markRaw<Component>(payload.component)
