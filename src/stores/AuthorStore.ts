@@ -45,10 +45,34 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
 
         try {
-            const response = await axiosService.postData('/aythors', author);
+            const response = await axiosService.postData('/authors', author);
             notificationStore.success('Author added successfully!')
         } catch (err: any) {
             console.error('Failed to add author:', err)
+            notificationStore.warning('Error fetching data:' + err)
+        }
+    }
+
+    const updateAuthor = async (author: IAuthor) => {
+        try {
+            if (!author) throw Error('Failed to update author, no author provided')
+            if (!author.name) throw Error('Failed to update author, author must have a name')
+            if (!author.surname) throw Error('Failed to update author, author must have a name')
+            if (!author.id) throw Error('Failed to update author, author must have an id')
+
+            const response = await axiosService.updateData('/authors', author.id, author)
+
+            notificationStore.success(`Updated author ${author.id} ${author.name} ${author.surname}`)
+
+            const defaultPage = 1;
+            const defaultLimit = 5;
+            const defaultQuery = '';
+
+            await fetchAuthors(defaultPage, defaultLimit, defaultQuery)
+            return response;
+        } catch (err: any) {
+            console.error('Failed to add author:', err)
+            notificationStore.warning('Error: ' + err.message)
         }
     }
 
@@ -56,6 +80,7 @@ export const useAuthorsStore = defineStore('authors-store', () => {
     return {
         authors: readonly(authors),
         fetchAuthors,
-        addAuthor
+        addAuthor,
+        updateAuthor
     }
 });
