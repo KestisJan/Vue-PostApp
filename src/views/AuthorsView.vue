@@ -10,6 +10,8 @@ import Pagination from '@/components/common/Pagination.vue';
 import CreateAuthor from '@/components/authors/CreateAuthor.vue';
 import Modal from '@/components/common/Modal.vue';
 import Search from '@/components/common/Search.vue';
+import UpdateAuthor from '@/components/authors/UpdateAuthor.vue';
+
 
 
 const authorsStore = useAuthorsStore()
@@ -63,6 +65,26 @@ const createAuthor = () => {
   modalStore.openModal(createPayload)
 }
 
+
+const updateAuthor = (id: number) => {
+  const updatePayload: IModalProps = {
+    component: UpdateAuthor,
+    props: {
+      callbackfn: () => {
+        isLoading.value = true
+        authors.value = []
+        setTimeout(async () => {
+          await loadData()
+        }, 50)
+      }
+    }
+  }
+
+  modalStore.openModal(updatePayload)
+}
+
+
+
 const handlePagination = ({ page, limit} : { page: number; limit: number}) => {
   currentPage.value = page.value
   itemsPerPage.value = limit
@@ -97,7 +119,11 @@ loadData()
     <div class="hero-body">
         <div class="container">
             <div v-if="isLoading">Loading</div>
-            <AuthorsCard v-else :authors="authors"/>
+            <AuthorsCard v-else :authors="authors">
+              <template v-slot:edit-author="author">
+                <button class="button" @click="updateAuthor">Edit</button>
+              </template>
+            </AuthorsCard>
         </div>
     </div>
     <Pagination

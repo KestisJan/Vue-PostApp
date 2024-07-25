@@ -34,6 +34,13 @@ const formatDate = (dateString: string): string => {
                             </span>
                         </p>
                     </div>
+                    <div class="card-footer">
+                        <slot name="edit-author" :author="author">
+                            <button class="button"  @click="defaultAction(author)">
+                                Default Action
+                            </button>
+                        </slot>
+                    </div>
                 </div>
             </div>
         </div>
