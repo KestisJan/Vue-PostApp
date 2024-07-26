@@ -76,11 +76,39 @@ export const usePostsStore = defineStore('posts-store', () => {
         }
     }
 
+    const getPost = async (id: number): Promise<IPost | null> => {
+        try {
+            return await axiosService.getData('/posts', id)
+        } catch (err: any) {
+            console.error('Error fetching posts: ', err)
+            notificationStore.warning('Error fetching posts: ' +  err.message || err )
+            return null
+        }
+    }
+
+    const updatePost = async (post: IPost) => {
+        try {
+            if (!post.id) throw Error('Failed to update post, no post id')
+            if (!post.title) throw Error('Failed to update post, post must have a title')
+            if (!post.body) throw Error('Failed to update post, post must have a body')
+
+            post.updated_at = new Date()
+            await axiosService.updateData('/posts', post.id, post)
+            notificationStore.success(`Updated post ${post.id} ${post.title}.s`)
+            await fetchPosts()
+        } catch (err: any) {
+            console.error('Error updating post: ', err)
+            notificationStore.warning('Error updating post: ' + err.message || err)
+        }
+    }
+
 
     return {
         posts: readonly(posts),
         fetchPosts,
         getPostWithAuthor,
-        addPost
+        addPost,
+        getPost,
+        updatePost
     }
 })

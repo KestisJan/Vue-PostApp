@@ -75,27 +75,48 @@ const createPost = () => {
   modalStore.openModal(createPayload)
 }
 
+const updatePost = (id: number) => {
+  const updatePayload: IModalProps = {
+    component: updatePost,
+    props: {
+      callbackfn: () => {
+        isLoading.value = true
+        posts.value = []
+        setTimeout(async () => {
+          await loadData()
+        }, 50)
+      }
+    }
+  }
+
+  modalStore.openModal(updatePayload)
+}
+
 
 loadData()
 
 </script>
 
 <template>
-    <button @click="openModal">Open Modal</button>
-    <button class="button" @click="createPost">Add new author</button>
-    <Search @search="handleSearch" />
-    <PostCard :posts="posts"/>
-    <Pagination 
-        :total-items="itemCount"
-        @update="handlePagination"
-    />
-    <Modal
-        :show="showModal" 
-        :formData="postData"
-        formType="create"
-        @close="showModal = false"
-    />
-       
+    <div class="hero is-fullheight">
+        <button class="button" @click="createPost">Add new Post</button>
+        <Search @search="handleSearch" />
+        <PostCard :posts="posts">
+            <template v-slot:edit-author="author">
+                <button class="button" @click="updatePost">Edit</button>
+            </template>
+        </PostCard>
+        <Pagination 
+            :total-items="itemCount"
+            @update="handlePagination"
+        />
+        <Modal
+            :show="showModal" 
+            :formData="postData"
+            formType="create"
+            @close="showModal = false"
+        />
+    </div>
 </template>
 
 
