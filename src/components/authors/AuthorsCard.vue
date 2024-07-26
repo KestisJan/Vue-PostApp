@@ -40,6 +40,11 @@ const formatDate = (dateString: string): string => {
                                 Default Action
                             </button>
                         </slot>
+                        <slot name="delete-author" :author="author">
+                            <button class="button"  @click="defaultAction(author)">
+                                Delete Default Action
+                            </button>
+                        </slot>
                     </div>
                 </div>
             </div>

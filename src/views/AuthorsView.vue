@@ -11,7 +11,7 @@ import CreateAuthor from '@/components/authors/CreateAuthor.vue';
 import Modal from '@/components/common/Modal.vue';
 import Search from '@/components/common/Search.vue';
 import UpdateAuthor from '@/components/authors/UpdateAuthor.vue';
-
+import ConfirmationWindow from '@/components/common/ConfirmationWindow.vue';
 
 
 const authorsStore = useAuthorsStore()
@@ -101,6 +101,25 @@ const handleSearch = (searchParams: { [key: string]: string }) => {
     loadData(currentPage.value, itemsPerPage.value)
 }
 
+const confirmDeleteAuthor = (id: number, name?: string, surname?: string) => {
+  const confirmPayload: IModalProps = {
+    component: ConfirmationWindow,
+    props: {
+      title: 'Deleting Author...',
+      message: `Are you sure you want to delete ${name} ${surname}?`,
+      callbackfn: (confirmed: boolean) => {
+        if (confirmed) {
+          authorsStore.deleteAuthor(id)
+          setTimeout(async () => {
+            await loadData()
+          }, 50)
+        }
+        modalStore.closeModal()
+      }
+    }
+  }
+  modalStore.openModal(confirmPayload)
+}
 
 
 
@@ -122,6 +141,9 @@ loadData()
             <AuthorsCard v-else :authors="authors">
               <template v-slot:edit-author="author">
                 <button class="button" @click="updateAuthor">Edit</button>
+              </template>
+              <template v-slot:delete-author="author">
+                <button class="button" @click="confirmDeleteAuthor">Delete</button>
               </template>
             </AuthorsCard>
         </div>

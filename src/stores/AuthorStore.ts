@@ -114,6 +114,7 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         fetchAuthors,
         addAuthor,
         updateAuthor,
-        getAuthor
+        getAuthor,
+        deleteAuthor
     }
 });
