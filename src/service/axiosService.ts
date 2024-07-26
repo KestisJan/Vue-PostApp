@@ -1,3 +1,4 @@
+import { useCurrentUserStore } from '@/stores/CurrentUserStore';
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:3000';
@@ -87,6 +88,26 @@ export default {
                 }
             });
             return response.data
+        } catch (err: any) {
+            return handleError(err)
+        }
+    },
+
+
+    async deleteData(endpoint: string, id: number) {
+        const currentUserStore = useCurrentUserStore()
+
+        if (!currentUserStore.currentUser) {
+            throw Error("Can't delete data, because you're currently not logged in.")
+        }
+
+        try {
+            const response = await axios.delete(`${endpoint}/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response
         } catch (err: any) {
             return handleError(err)
         }
