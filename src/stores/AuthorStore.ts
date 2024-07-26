@@ -55,11 +55,12 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
 
         try {
-            const response = await axiosService.postData('/authors', author);
+            const response = await axiosService.postData('/authors', JSON.stringify(author));
             notificationStore.success('Author added successfully!')
+            return response
         } catch (err: any) {
             console.error('Failed to add author:', err)
-            notificationStore.warning('Error fetching data:' + err)
+            notificationStore.warning('Error adding author' + err)
         }
     }
 
@@ -86,12 +87,35 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
     }
 
+    const deleteAuthor = async (author: IAuthor) => {
+        const currentUserStore = useCurrentUserStore()
+
+        if (!currentUserStore.currentUser) {
+            throw Error("Can't delete author, because you're currently not logged in.")
+        }
+
+        try {
+            if (!author) throw Error('Failed to update author, no author provided')
+            if (!author.id) throw Error('Failed to delete author, author must have an id')
+
+            const response = await axiosService.deleteData('/authors', author.id)
+
+            notificationStore.success(`Deleted author ${author.id} ${author.name} ${author.surname}`)
+
+            return response;
+        } catch (err: any) {
+            console.error('Failed to delete author:', err);
+            notificationStore.warning('Error: ' + err.message)
+        }
+    }
+
 
     return {
         authors: readonly(authors),
         fetchAuthors,
         addAuthor,
         updateAuthor,
-        getAuthor
+        getAuthor,
+        deleteAuthor
     }
 });

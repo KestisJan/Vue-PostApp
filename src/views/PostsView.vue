@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { type IModalProps } from '@/interface/IModal';
 import { usePostsStore } from '@/stores/PostStore'
 import { useModalStore } from '@/stores/ModalStore';
 import { type IPost } from '@/interface/IPost';
-import { type IModalProps } from '@/interface/IModal';
 import { ref } from 'vue'
 import PostCard from '@/components/posts/PostsCard.vue'
 import Pagination from '@/components/common/Pagination.vue';
 import Search from '@/components/common/Search.vue';
 import Modal from '@/components/common/Modal.vue';
+import CreatePost from '@/components/posts/CreatePost.vue'
 
 const postsStore = usePostsStore()
 const modalStore = useModalStore()
@@ -18,10 +19,6 @@ const itemsPerPage = ref(5)
 const itemCount = ref(0);
 const query = ref('')
 
-const openModal = (post: IPost | null = null) => {
- 
-
-}
 
 const loadData = async (page: number, limit: number) => {
     isLoading.value = true
@@ -62,6 +59,21 @@ const handleSearch = (searchParams: { [key: string]: string }) => {
 }
 
 
+const createPost = () => {
+  const createPayload: IModalProps = {
+    component: CreatePost,
+    props: {
+      callbackfn: () => {
+        isLoading.value = true
+        posts.value = []
+        setTimeout(async () => {
+          await loadData()
+        }, 50)
+      }
+    }
+  }
+  modalStore.openModal(createPayload)
+}
 
 
 loadData()
@@ -70,6 +82,7 @@ loadData()
 
 <template>
     <button @click="openModal">Open Modal</button>
+    <button class="button" @click="createPost">Add new author</button>
     <Search @search="handleSearch" />
     <PostCard :posts="posts"/>
     <Pagination 
@@ -81,9 +94,8 @@ loadData()
         :formData="postData"
         formType="create"
         @close="showModal = false"
-    >
+    />
        
-    </Modal>
 </template>
 
 
