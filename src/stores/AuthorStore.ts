@@ -55,11 +55,12 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
 
         try {
-            const response = await axiosService.postData('/authors', author);
+            const response = await axiosService.postData('/authors', JSON.stringify(author));
             notificationStore.success('Author added successfully!')
+            return response
         } catch (err: any) {
             console.error('Failed to add author:', err)
-            notificationStore.warning('Error fetching data:' + err)
+            notificationStore.warning('Error adding author' + err)
         }
     }
 
