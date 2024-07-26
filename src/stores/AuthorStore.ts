@@ -86,6 +86,28 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
     }
 
+    const deleteAuthor = async (author: IAuthor) => {
+        const currentUserStore = useCurrentUserStore()
+
+        if (!currentUserStore.currentUser) {
+            throw Error("Can't delete author, because you're currently not logged in.")
+        }
+
+        try {
+            if (!author) throw Error('Failed to update author, no author provided')
+            if (!author.id) throw Error('Failed to delete author, author must have an id')
+
+            const response = await axiosService.deleteData('/authors', author.id)
+
+            notificationStore.success(`Deleted author ${author.id} ${author.name} ${author.surname}`)
+
+            return response;
+        } catch (err: any) {
+            console.error('Failed to delete author:', err);
+            notificationStore.warning('Error: ' + err.message)
+        }
+    }
+
 
     return {
         authors: readonly(authors),

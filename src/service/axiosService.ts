@@ -95,12 +95,6 @@ export default {
 
 
     async deleteData(endpoint: string, id: number) {
-        const currentUserStore = useCurrentUserStore()
-
-        if (!currentUserStore.currentUser) {
-            throw Error("Can't delete data, because you're currently not logged in.")
-        }
-
         try {
             const response = await axios.delete(`${endpoint}/${id}`, {
                 headers: {
