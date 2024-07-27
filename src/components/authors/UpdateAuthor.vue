@@ -68,6 +68,8 @@ const editAuthor = () => {
     }
 }
 
+fetchAuthors()
+
 </script>
 
 

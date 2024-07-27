@@ -10,6 +10,7 @@ import Search from '@/components/common/Search.vue';
 import Modal from '@/components/common/Modal.vue';
 import CreatePost from '@/components/posts/CreatePost.vue'
 import UpdatePost from '@/components/posts/UpdatePost.vue';
+import ConfirmationWindow from '@/components/common/ConfirmationWindow.vue';
 
 const postsStore = usePostsStore()
 const modalStore = useModalStore()
@@ -80,6 +81,7 @@ const updatePost = (id: number) => {
   const updatePayload: IModalProps = {
     component: UpdatePost,
     props: {
+      id,
       callbackfn: () => {
         isLoading.value = true
         posts.value = []
@@ -94,6 +96,27 @@ const updatePost = (id: number) => {
 }
 
 
+const confirmDeletePost = (id: number, title?: string) => {
+  const confirmPayload: IModalProps = {
+    component: ConfirmationWindow,
+    props: {
+      title: 'Deleting Post...',
+      message: `Are you sure you want to delete ${title}?`,
+      callbackfn: (confirmed: boolean) => {
+        if (confirmed) {
+          postsStore.deletePost(id)
+          setTimeout(async () => {
+            await loadData()
+          }, 50)
+        }
+        modalStore.closeModal()
+      }
+    }
+  }
+  modalStore.openModal(confirmPayload)
+}
+
+
 loadData()
 
 </script>
@@ -103,8 +126,11 @@ loadData()
         <button class="button" @click="createPost">Add new Post</button>
         <Search @search="handleSearch" />
         <PostCard :posts="posts">
-            <template v-slot:edit-author="posts">
-                <button class="button" @click="updatePost">Edit</button>
+            <template v-slot:edit-post="{ post }">
+                <button class="button" @click="updatePost(post.id)">Edit</button>
+            </template>
+            <template v-slot:delete-post="{ post }">
+              <button class="button" @click="confirmDeletePost(post.id, post.title)">Delete</button>
             </template>
         </PostCard>
         <Pagination 

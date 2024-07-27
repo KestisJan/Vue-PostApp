@@ -40,16 +40,20 @@ const formatDate = (dateString: string): string => {
                     </div>
                     <div class="card-body p-4">
                         <p class="subtitle is-6">
-                            
                             <span>
                                 {{ post.body }}
                             </span>
                         </p>
                     </div>
                     <div class="card-footer">
-                        <slot name="edit-author" :post="post">
-                            <button class="button"  @click="defaultAction(post)">
-                                Default Action
+                        <slot name="edit-post" :post="post">
+                            <button class="button"  @click="defaultAction(post.id)">
+                                Default Edit
+                            </button>
+                        </slot>
+                        <slot name="delete-post" :post="post">
+                            <button class="button" @click="defaultAction(post.id)">
+                                Default Delete
                             </button>
                         </slot>
                     </div>
