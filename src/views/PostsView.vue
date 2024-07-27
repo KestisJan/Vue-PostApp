@@ -9,6 +9,7 @@ import Pagination from '@/components/common/Pagination.vue';
 import Search from '@/components/common/Search.vue';
 import Modal from '@/components/common/Modal.vue';
 import CreatePost from '@/components/posts/CreatePost.vue'
+import UpdatePost from '@/components/posts/UpdatePost.vue';
 
 const postsStore = usePostsStore()
 const modalStore = useModalStore()
@@ -75,27 +76,43 @@ const createPost = () => {
   modalStore.openModal(createPayload)
 }
 
+const updatePost = (id: number) => {
+  const updatePayload: IModalProps = {
+    component: UpdatePost,
+    props: {
+      callbackfn: () => {
+        isLoading.value = true
+        posts.value = []
+        setTimeout(async () => {
+          await loadData()
+        }, 50)
+      }
+    }
+  }
+
+  modalStore.openModal(updatePayload)
+}
+
 
 loadData()
 
 </script>
 
 <template>
-    <button @click="openModal">Open Modal</button>
-    <button class="button" @click="createPost">Add new author</button>
-    <Search @search="handleSearch" />
-    <PostCard :posts="posts"/>
-    <Pagination 
-        :total-items="itemCount"
-        @update="handlePagination"
-    />
-    <Modal
-        :show="showModal" 
-        :formData="postData"
-        formType="create"
-        @close="showModal = false"
-    />
-       
+    <div class="hero is-fullheight">
+        <button class="button" @click="createPost">Add new Post</button>
+        <Search @search="handleSearch" />
+        <PostCard :posts="posts">
+            <template v-slot:edit-author="posts">
+                <button class="button" @click="updatePost">Edit</button>
+            </template>
+        </PostCard>
+        <Pagination 
+            :total-items="itemCount"
+            @update="handlePagination"
+        />
+        <Modal />
+    </div>
 </template>
 
 
