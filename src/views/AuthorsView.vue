@@ -70,6 +70,7 @@ const updateAuthor = (id: number) => {
   const updatePayload: IModalProps = {
     component: UpdateAuthor,
     props: {
+      id,
       callbackfn: () => {
         isLoading.value = true
         authors.value = []
@@ -139,11 +140,11 @@ loadData()
         <div class="container">
             <div v-if="isLoading">Loading</div>
             <AuthorsCard v-else :authors="authors">
-              <template v-slot:edit-author="author">
-                <button class="button" @click="updateAuthor">Edit</button>
+              <template v-slot:edit-author="{ author}">
+                <button class="button" @click="updateAuthor(author.id)">Edit</button>
               </template>
-              <template v-slot:delete-author="author">
-                <button class="button" @click="confirmDeleteAuthor">Delete</button>
+              <template v-slot:delete-author="{ author }">
+                <button class="button" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">Delete</button>
               </template>
             </AuthorsCard>
         </div>

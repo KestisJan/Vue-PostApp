@@ -102,6 +102,26 @@ export const usePostsStore = defineStore('posts-store', () => {
         }
     }
 
+    const deletePost = async (id: number) => {
+        const currentUserStore = useCurrentUserStore()
+
+        if (!currentUserStore.currentUser) {
+            throw Error("Can't delete author, because you're currently not logged in.")
+        }
+
+        try {
+            if (!id) throw Error('Failed to delete post, post must have an id')
+
+            const response = await axiosService.deleteData('/posts', id)
+
+            notificationStore.success(`Deleted post ${id}`)
+
+            return response;
+        } catch (err: any) {
+            console.error('Failed to delete author:', err);
+            notificationStore.warning('Error: ' + err.message)
+        }
+    }
 
     return {
         posts: readonly(posts),
@@ -109,6 +129,7 @@ export const usePostsStore = defineStore('posts-store', () => {
         getPostWithAuthor,
         addPost,
         getPost,
-        updatePost
+        updatePost,
+        deletePost
     }
 })
