@@ -58,20 +58,20 @@ const validate = () => {
 
 
 <template>
-    <div class="container is-fluid is-fullwidth">
-        <div class="box">
-            <h1 class="title">
-                <i class="fas fa-sign-in-alt"></i>
+    <div class="container is-fluid is-fullwidth is-flex is-justify-content-center mt-6">
+       <div class="box" style="max-width: 400px; width: 100%;">
+            <h1 class="title has-text-centered">
+                <i class="fas fa-sign-in-alt"></i> Login
             </h1>
             <form class="form">
                 <div class="field">
                     <div class="control has-icons-left">
                         <input
-                            type="text" 
-                            class="input is-fullwidth" 
+                            type="text"
+                            class="input"
                             placeholder="Email"
                             v-model="email"
-                        >
+                        />
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -79,36 +79,51 @@ const validate = () => {
                 </div>
                 <div class="field">
                     <div class="control has-icons-left">
-                        <input 
-                            type="password" 
-                            class="input is-fullwidth" 
+                        <input
+                            type="password"
+                            class="input"
                             placeholder="Password"
                             v-model="password"
-                        >
+                        />
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                         </span>
                     </div>
                 </div>
                 <div class="field">
-                    <button class="button is-fullwidth" @click="login">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Login
+                    <button class="button is-primary is-fullwidth" @click="login">
+                        <i class="fas fa-sign-in-alt"></i> Login
                     </button>
-                    <ul v-if="validationMessage.length">
+                    <ul v-if="validationMessage.length" class="has-text-danger mt-2">
                         <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
                     </ul>
                 </div>
             </form>
-            <div class="field-bot">
-                <p>Don't have an account yet?</p>
-                <RouterLink to="/register">
-                    Register here
-                </RouterLink>
-            </div>
-        </div>
+       </div> 
     </div>
 </template>
 
-<style>
+<style scoped>
+.container {
+    margin-top: 3rem;
+}
+
+.box {
+    width: 100%;
+    max-width: 400px;
+}
+
+.field-bot {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.button {
+    margin-top: 1rem;
+}
+
+ul {
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
 </style>
