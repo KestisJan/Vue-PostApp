@@ -133,31 +133,49 @@ loadData()
 
 <template>
   <div class="hero is-fullheight">
-    <Search @search="handleSearch" />
-    <h1 class="title">Authors list</h1>
-    <button class="button" @click="createAuthor">Add new author</button>
-    <div class="hero-body">
-        <div class="container">
-            <div v-if="isLoading">Loading</div>
-            <AuthorsCard v-else :authors="authors">
-              <template v-slot:edit-author="{ author}">
-                <button class="button" @click="updateAuthor(author.id)">Edit</button>
-              </template>
-              <template v-slot:delete-author="{ author }">
-                <button class="button" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">Delete</button>
-              </template>
-            </AuthorsCard>
-        </div>
+    <div class="hero-head">
+      <div class="container has-text-centered">
+        <h1 class="title mt-4">Authors List</h1>
+        <button class="button is-primary mt-4" @click="createAuthor">Add New Author</button>
+        <Search @search="handleSearch"/>
+      </div>
     </div>
-    <Pagination
-      :total-items="itemCount"
-      @update="handlePagination"
-    />
-    <Modal/>
+    <div class="hero-body">
+      <div class="container">
+        <div v-if="isLoading" class="has-text-centered">Loading...</div>
+        <div v-else>
+          <AuthorsCard :authors="authors">
+            <template v-slot:edit-author="{ author }">
+              <button class="button is-warning" @click="updateAuthor(author.id)">Edit</button>
+            </template>
+            <template v-slot:delete-author="{ author }">
+              <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">Delete</button>
+            </template>
+          </AuthorsCard>
+        </div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="container has-text-centered">
+        <Pagination :total-items="itemCount" @update="handlePagination" />
+      </div>
+    </div>
+    <Modal />
   </div>
 </template>
 
-
 <style scoped>
+.hero {
+  padding: 2rem;
+}
 
+.hero-head,
+.hero-foot {
+  padding: 1rem 0;
+}
+
+.title,
+.button {
+  margin-bottom: 1rem;
+}
 </style>

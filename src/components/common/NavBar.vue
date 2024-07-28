@@ -37,7 +37,6 @@
 
 <style scoped>
 .breadcrumb {
-    background-color: #f5f5f5;
     border-radius: 4px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }

@@ -38,7 +38,7 @@ const clearSearch = () => {
 
 <template>
 <div class="container">
-    <div class="box">
+    <div class="box-title">
         <div class="search">
             <input 
                class="form-control"
@@ -55,5 +55,7 @@ const clearSearch = () => {
 </template>
 
 <style scoped>
-
+.box-title {
+    background: transparent;
+}
 </style>

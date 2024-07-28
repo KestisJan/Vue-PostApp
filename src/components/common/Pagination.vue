@@ -55,7 +55,7 @@ watch (
 </script>
 
 <template>
-    <div class="box">
+    <div class="">
         <button 
             class="button"
             @click="goToPreviousPage"

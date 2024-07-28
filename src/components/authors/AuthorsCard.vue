@@ -14,44 +14,65 @@ const formatDate = (dateString: string): string => {
 </script>
 
 <template>
-   <div class="card">
-        <div class="card-content is-flex is-flex-direction-column is-align-items-center">
-            <div v-if="!authors.length" class="">
-                No Authors available
-            </div>
-            <div v-else>
-                <div v-for="author in authors" class="box" style="width: 100%; height: 100%; max-width: 500px;">
-                    <div class="card-header">
-                        <p class="title is-5">{{ author.name }} {{ author.surname }}</p>
-                    </div>
-                    <div class="card-body p-4">
-                        <p class="subtitle is-6">
-                            <span v-if="author.updated_at && author.created_at && author.updated_at > author.created_at">
-                                Updated: {{ formatDate(author.updated_at) }}
-                            </span>
-                            <span v-else-if="author.created_at">
-                                Created: {{ formatDate(author.created_at) }}
-                            </span>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <slot name="edit-author" :author="author">
-                            <button class="button"  @click="defaultAction(author)">
-                                Default Action
-                            </button>
-                        </slot>
-                        <slot name="delete-author" :author="author">
-                            <button class="button"  @click="defaultAction(author)">
-                                Delete Default Action
-                            </button>
-                        </slot>
-                    </div>
-                </div>
-            </div>
+    <div class="columns is-multiline">
+      <div class="column is-one-third" v-for="author in authors" :key="author.id">
+        <div class="card">
+          <div class="card-content">
+            <p class="title">{{ author.name }} {{ author.surname }}</p>
+            <p class="subtitle is-6">
+              <span v-if="author.updated_at && author.created_at && author.updated_at > author.created_at">
+                Updated: {{ formatDate(author.updated_at) }}
+              </span>
+              <span v-else-if="author.created_at">
+                Created: {{ formatDate(author.created_at) }}
+              </span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <slot name="edit-author" :author="author">
+              <button class="button is-warning" @click="updateAuthor(author.id)">Edit</button>
+            </slot>
+            <slot name="delete-author" :author="author">
+              <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">Delete</button>
+            </slot>
+          </div>
         </div>
-   </div>
-</template>
+      </div>
+    </div>
+  </template>
+
 
 <style scoped>
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
 
+.card-box {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.card-body {
+  text-align: left;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
 </style>

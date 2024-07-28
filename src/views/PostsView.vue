@@ -122,26 +122,52 @@ loadData()
 </script>
 
 <template>
-    <div class="hero is-fullheight">
-        <button class="button" @click="createPost">Add new Post</button>
-        <Search @search="handleSearch" />
+  <div class="hero is-fullheight">
+    <div class="container">
+      <button class="button is-primary" @click="createPost">Add new Post</button>
+      <Search @search="handleSearch" />
+      <div class="columns is-multiline">
         <PostCard :posts="posts">
-            <template v-slot:edit-post="{ post }">
-                <button class="button" @click="updatePost(post.id)">Edit</button>
-            </template>
-            <template v-slot:delete-post="{ post }">
-              <button class="button" @click="confirmDeletePost(post.id, post.title)">Delete</button>
-            </template>
+          <template v-slot:default="{ post }">
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <p class="title">{{ post.title }}</p>
+                  <p class="subtitle">{{ post.body }}</p>
+                </div>
+                <footer class="card-footer">
+                  <slot name="edit-post" :post="post">
+                    <button class="button is-info" @click="updatePost(post.id)">Edit</button>
+                  </slot>
+                  <slot name="delete-post" :post="post">
+                    <button class="button is-danger" @click="confirmDeletePost(post.id, post.title)">Delete</button>
+                  </slot>
+                </footer>
+              </div>
+            </div>
+          </template>
         </PostCard>
-        <Pagination 
-            :total-items="itemCount"
-            @update="handlePagination"
-        />
-        <Modal />
+      </div>
+      <Pagination 
+        :total-items="itemCount"
+        @update="handlePagination"
+      />
+      <Modal />
     </div>
+  </div>
 </template>
 
 
 <style scoped>
+.hero {
+  padding: 2rem;
+}
 
+.button {
+  margin-bottom: 1rem;
+}
+
+.card {
+  width: 100%;
+}
 </style>
