@@ -86,8 +86,8 @@ const validate = () => {
 </script>
 
 <template>
-    <div class="container is-fluid is-fullwidth">
-        <div class="box">
+    <div class="container is-fluid is-fullwidth is-flex is-justify-content-center">
+        <div class="box" style="max-width: 500px; width: 100%;">
             <h1 class="title has-text-centered">
                 <i class="fas fa-user-plus"></i> Register
             </h1>
@@ -95,8 +95,8 @@ const validate = () => {
                 <div class="field">
                     <div class="control has-icons-left">
                         <input 
-                            type="text" 
-                            class="input is-fullwidth" 
+                            type="text"
+                            class="input"
                             placeholder="Name"
                             v-model="name"
                         />
@@ -104,58 +104,57 @@ const validate = () => {
                             <i class="fas fa-user"></i>
                         </span>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input 
-                        type="email" 
-                        class="input is-fullwidth" 
-                        placeholder="Email"
-                        v-model="email"
-                        />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input
+                                type="text"
+                                class="input"
+                                placeholder="Email"
+                                v-model="email"
+                            />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input 
-                        type="password" 
-                        class="input is-fullwidth" 
-                        placeholder="Password"
-                        v-model="password"
-                        />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input
+                                type="password"
+                                class="input"
+                                placeholder="Password"
+                                v-model="password"
+                            />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input 
-                        type="password" 
-                        class="input is-fullwidth" 
-                        placeholder="Confirm Password"
-                        v-model="confirmPassword"
-                        />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input
+                                type="password"
+                                class="input"
+                                placeholder="Confirm Password"
+                                v-model="confirmPassword"
+                            />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <button class="button is-fullwidth is" @click="register">
-                        <i class="fas fa-user-plus"></i> Register
-                    </button>
-                    <ul v-if="validationMessage.length">
-                        <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
-                    </ul>
+                    <div class="field">
+                        <button class="button is-fullwidth is-primary" @click="register">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                        <ul v-if="validationMessage.length" class="has-text-danger mt-2">
+                            <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+                        </ul>
+                    </div>
                 </div>
             </form>
-            <div class="field-bot">
-                <p>Already have an account?
-                </p>
+            <div class="field-bot has-text-centered mt-4">
+                <p>Already have an account?</p>
                 <RouterLink to="/login" class="has-text-link">
                     Login here
                 </RouterLink>
@@ -164,5 +163,17 @@ const validate = () => {
     </div>
 </template>
 
-<style>
+<style scoped>
+.container {
+    margin-top: 50px;
+}
+
+.field-bot {
+    margin-top: 20px;
+}
+
+.has-text-danger {
+    list-style: none;
+    padding-left: 0;
+}
 </style>
