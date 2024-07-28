@@ -99,6 +99,12 @@ const validate = () => {
                     </ul>
                 </div>
             </form>
+            <div class="field-bot has-text-centered mt-4">
+                <p>Don't have account yet??</p>
+                <RouterLink to="/register" class="has-text-link">
+                    Register here
+                </RouterLink>
+            </div>
        </div> 
     </div>
 </template>
