@@ -104,53 +104,53 @@ const validate = () => {
                             <i class="fas fa-user"></i>
                         </span>
                     </div>
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input
-                                type="text"
-                                class="input"
-                                placeholder="Email"
-                                v-model="email"
-                            />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="Email"
+                            v-model="email"
+                        />
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
                     </div>
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input
-                                type="password"
-                                class="input"
-                                placeholder="Password"
-                                v-model="password"
-                            />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </div>
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input
+                            type="password"
+                            class="input"
+                            placeholder="Password"
+                            v-model="password"
+                        />
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
                     </div>
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input
-                                type="password"
-                                class="input"
-                                placeholder="Confirm Password"
-                                v-model="confirmPassword"
-                            />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </div>
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input
+                            type="password"
+                            class="input"
+                            placeholder="Confirm Password"
+                            v-model="confirmPassword"
+                        />
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
                     </div>
-                    <div class="field">
-                        <button class="button is-fullwidth is-primary" @click="register">
-                            <i class="fas fa-user-plus"></i> Register
-                        </button>
-                        <ul v-if="validationMessage.length" class="has-text-danger mt-2">
-                            <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="field">
+                    <button class="button is-fullwidth is-primary" @click="register">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                    <ul v-if="validationMessage.length" class="has-text-danger mt-2">
+                        <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+                    </ul>
                 </div>
             </form>
             <div class="field-bot has-text-centered mt-4">
@@ -168,12 +168,51 @@ const validate = () => {
     margin-top: 50px;
 }
 
-.field-bot {
-    margin-top: 20px;
+.box {
+    background-color: #FAF6F6; 
+    border-radius: 8px; 
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .5); 
+}
+
+.title {
+    color: #0B132B; 
+}
+
+.input {
+    border-color: #1C2541; 
+    background-color: #FAF6F6; 
+}
+
+.button.is-primary {
+    background-color: #0B132B; 
+    border-color: #0B132B; 
+    color: #FAF6F6;
+}
+
+.button.is-primary:hover {
+    background-color: #1C2541; 
+    border-color: #1C2541;
 }
 
 .has-text-danger {
-    list-style: none;
-    padding-left: 0;
+    color: #d9534f;
+}
+
+.field-bot {
+    margin-top: 20px;
+    color: #0B132B; 
+}
+
+.has-text-link {
+    color: #1C2541;
+}
+
+.has-text-link:hover {
+    color: #0B132B; 
+}
+
+.icon.is-small.is-left {
+    color: #0B132B; 
 }
 </style>

@@ -100,7 +100,7 @@ const validate = () => {
                 </div>
             </form>
             <div class="field-bot has-text-centered mt-4">
-                <p>Don't have account yet??</p>
+                <p>Don't have an account yet?</p>
                 <RouterLink to="/register" class="has-text-link">
                     Register here
                 </RouterLink>
@@ -115,21 +115,50 @@ const validate = () => {
 }
 
 .box {
-    width: 100%;
-    max-width: 400px;
+    background-color: #FAF6F6;
+    border-radius: 8px; 
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    color: #0B132B;
+}
+
+.input {
+    border-color: #1C2541; 
+    background-color: #FAF6F6; 
+}
+
+.button.is-primary {
+    background-color: #0B132B; 
+    border-color: #0B132B; 
+    color: #FAF6F6;
+}
+
+.button.is-primary:hover {
+    background-color: #1C2541; 
+    border-color: #1C2541; 
+}
+
+.has-text-danger {
+    color: #d9534f; 
 }
 
 .field-bot {
-    text-align: center;
     margin-top: 1rem;
+    color: #0B132B; 
 }
 
-.button {
-    margin-top: 1rem;
+.has-text-link {
+    color: #1C2541;
 }
 
-ul {
-    margin-top: 1rem;
-    padding-left: 1rem;
+.has-text-link:hover {
+    color: #0B132B; 
+}
+
+.icon.is-small.is-left {
+    color: #0B132B; 
 }
 </style>
