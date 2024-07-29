@@ -38,10 +38,10 @@ const clearSearch = () => {
 
 <template>
 <div class="container">
-    <div class="box">
-        <div class="search">
+    <div class="field has-addons">
+        <div class="control is-expanded">
             <input 
-               class="form-control"
+               class="input"
                v-model="query"
                type="text"
                placeholder="Search..."
@@ -49,11 +49,36 @@ const clearSearch = () => {
                @input="handleSearch"
             />
         </div>
-        <button @click="clearSearch">Clear</button>
+        <div class="control">
+            <button class="button is-danger" @click="clearSearch">Clear</button>
+        </div>
     </div>
 </div>    
 </template>
 
 <style scoped>
+.container {
+    padding: 1rem;
+    border-radius: 8px;
+}
 
+.input {
+    border-color: #1C2541;
+    color: #0B132B;
+}
+
+.input::placeholder {
+  color: #1C2541;
+}
+
+.button {
+  background-color: #1C2541;
+  border-color: #1C2541;
+  color: #FAF6F6;
+}
+
+.button:hover {
+  background-color: #0B132B;
+  border-color: #0B132B;
+}
 </style>
