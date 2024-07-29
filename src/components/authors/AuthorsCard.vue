@@ -16,10 +16,10 @@ const formatDate = (dateString: string): string => {
 <template>
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="author in authors" :key="author.id">
-        <div class="card">
+        <div class="card is-background-grey">
           <div class="card-content">
-            <p class="title">{{ author.name }} {{ author.surname }}</p>
-            <p class="subtitle is-6">
+            <p class="title has-text-white">{{ author.name }} {{ author.surname }}</p>
+            <p class="subtitle is-6 has-text-white">
               <span v-if="author.updated_at && author.created_at && author.updated_at > author.created_at">
                 Updated: {{ formatDate(author.updated_at) }}
               </span>

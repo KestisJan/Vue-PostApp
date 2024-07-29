@@ -55,7 +55,7 @@ watch (
 </script>
 
 <template>
-    <div class="">
+    <div class="pagination-container">
         <button 
             class="button"
             @click="goToPreviousPage"
@@ -64,7 +64,7 @@ watch (
         Previous
         </button>
         <span v-if="totalPages > 0">Page {{  currentPage }} of {{ totalPages }}</span>
-        <span v-else>No Pages</span>
+        <span v-else class=page-info>No Pages</span>
         <button 
             class="button"
             @click="goToNextPage"
@@ -72,17 +72,59 @@ watch (
         >
         Next
         </button>
-        <select
-            v-model="itemsPerPage"
-            @change="emitPagination"
-            :disabled="totalPages === 0"
-            class=""
-        >
-            <option v-for="option in itemsPerPageOption" :key="option" :value="option">{{ option }}</option>
-        </select>
+        <div class="select">
+            <select
+                v-model="itemsPerPage"
+                @change="emitPagination"
+                :disabled="totalPages === 0"
+                class=""
+            >
+                <option v-for="option in itemsPerPageOption" :key="option" :value="option">{{ option }}</option>
+            </select>
+        </div>
     </div>
 </template>
 
 
 <style>
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.button {
+    margin: 0 0.5rem;
+    background-color: #1C2541;
+    border-color: #1C2541;
+}
+
+.button:hover {
+    border-color: #0B132B;
+}
+
+.page-info {
+    margin: 0 1rem;
+    color: #1C2541;
+    font-weight: bold;
+}
+
+.select select {
+    color: #FAF6F6;
+    background-color: #1C2541;
+    
+}
+
+.select select:hover {
+    border-color: #0B132B;
+}
+
+.select::after {
+  border-color: #1C2541;
+}
+
+.select:hover::after {
+  border-color: #0B132B;
+}
 </style>
