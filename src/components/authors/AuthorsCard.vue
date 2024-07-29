@@ -39,22 +39,21 @@ const formatDate = (dateString: string): string => {
                   </div>
                   <footer class="card-footer">
                     <slot name="edit-post" :post="post">
-              <button class="button is-warning" @click="defaultAction(post.id)">
-                <span class="icon is-small">
-                  <i class="fas fa-edit"></i>
-                </span>
-                <span>Edit</span>
-              </button>
-            </slot>
-            <slot name="delete-post" :post="post">
-              <button class="button is-danger" @click="defaultAction(post.id)">
-                <span class="icon is-small">
-                  <i class="fas fa-trash"></i>
-                </span>
-                <span>Delete</span>
-              </button>
-            </slot>
-
+                      <button class="button is-warning" @click="defaultAction(post.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-edit"></i>
+                        </span>
+                        <span>Edit</span>
+                      </button>
+                    </slot>
+                    <slot name="delete-post" :post="post">
+                      <button class="button is-danger" @click="defaultAction(post.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+                        <span>Delete</span>
+                      </button>
+                    </slot>
                   </footer>
               </div>
           </div>
