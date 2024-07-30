@@ -151,10 +151,20 @@ loadData()
         <div v-else>
           <AuthorsCard :authors="authors">
             <template v-slot:edit-author="{ author }">
-              <button class="button is-warning" @click="updateAuthor(author.id)">Edit</button>
+              <button class="button is-warning" @click="updateAuthor(author.id)">
+                <span class="icon is-small">
+                  <i class="fas fa-edit"></i>
+                </span>
+                <span>Edit</span>
+              </button>
             </template>
             <template v-slot:delete-author="{ author }">
-              <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">Delete</button>
+              <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">
+                <span class="icon is-small">
+                  <i class="fas fa-trash"></i>
+                </span>
+                <span>Delete</span>
+              </button>
             </template>
           </AuthorsCard>
         </div>
@@ -193,8 +203,14 @@ loadData()
 }
 
 .button {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
   color: #FAF6F6;
+}
+
+.button .icon {
+  margin-right: 0.5rem;
 }
 
 .button.is-primary {
@@ -208,24 +224,24 @@ loadData()
 }
 
 .button.is-warning {
-  background-color: #1C2541;
-  border-color: #1C2541;
-  color: #FAF6F6;
+  background-color: #F5A623;
+  border-color: #F5A623;
+  color: #FFFFFF;
 }
 
 .button.is-warning:hover {
-  background-color: #0B132B;
-  border-color: #0B132B;
+  background-color: #F1C40F;
+  border-color: #F1C40F;
 }
 
 .button.is-danger {
-  background-color: #1C2541;
-  border-color: #1C2541;
-  color: #FAF6F6;
+  background-color: #FF3860;
+  border-color: #FF3860;
+  color: #FFFFFF;
 }
 
 .button.is-danger:hover {
-  background-color: #0B132B;
-  border-color: #0B132B;
+  background-color: #FF1E48;
+  border-color: #FF1E48;
 }
 </style>

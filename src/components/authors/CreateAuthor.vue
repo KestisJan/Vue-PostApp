@@ -59,27 +59,99 @@ const validate = () => {
 
 
 <template>
-    <div>
-        <h3>Create Author</h3>
-        <form v-on:submit.prevent="createNewAuthor">
-            <input
-                type="text"
-                v-model="name"
-                placeholder="Name"
-                class="input-field"
-                maxlength="50"
-            />
-            <input 
-                type="text"
-                v-model="surname"
-                placeholder="Surname"
-                class="input-field"
-                maxlength="50"
-            />
-            <button type="submit" class="submit-button">Create</button>
-            <ul v-if="validationMessage.length">
-                <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
-            </ul>
+    <div class="container">
+        <h3 class="title">Create Author</h3>
+        <form v-on:submit.prevent="createNewAuthor" class="form">
+        <input
+            type="text"
+            v-model="name"
+            placeholder="Name"
+            class="input-field"
+            maxlength="50"
+        />
+        <input
+            type="text"
+            v-model="surname"
+            placeholder="Surname"
+            class="input-field"
+            maxlength="50"
+        />
+        <button type="submit" class="submit-button">Create</button>
+        <ul v-if="validationMessage.length" class="validation-messages">
+            <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+        </ul>
         </form>
     </div>
 </template>
+
+
+<style scoped>
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #FAF6F6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #0B132B;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-field {
+  padding: 0.75rem;
+  border: 1px solid #1C2541;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #0B132B;
+  background-color: #FFFFFF;
+}
+
+.input-field::placeholder {
+  color: #B0B0B0;
+}
+
+.submit-button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #0B132B;
+  color: #FAF6F6;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #1C2541;
+}
+
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+.validation-messages {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #FFE4E4;
+  border: 1px solid #FF4C4C;
+  border-radius: 4px;
+  color: #FF4C4C;
+  list-style: none;
+}
+
+.validation-messages li {
+  margin-bottom: 0.5rem;
+}
+
+</style>

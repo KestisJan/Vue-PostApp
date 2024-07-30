@@ -132,7 +132,7 @@ loadData()
           </span>
           <span class="ml-1">Add New Post</span>
         </button>
-        <Search @search="handleSearch"/>
+        <Search :searchField="searchFields" @search="handleSearch"/>
       </div>
     </div>
     <div class="hero-body">
@@ -141,27 +141,21 @@ loadData()
         <div v-else>
           <div class="columns is-multiline">
             <PostCard :posts="posts">
-              <template v-slot:default="{ post }">
-                <div class="column is-one-third">
-                  <div class="post-card card">
-                    <div class="card-content">
-                      <p class="title">{{ post.title }}</p>
-                      <p class="subtitle">{{ post.body }}</p>
-                    </div>
-                    <footer class="card-footer">
-                      <slot name="edit-post" :post="post">
-                        <button class="button is-info" @click="updatePost(post.id)">
-                          <i class="fas fa-edit"></i> Edit
-                        </button>
-                      </slot>
-                      <slot name="delete-post" :post="post">
-                        <button class="button is-danger" @click="confirmDeletePost(post.id, post.title)">
-                          <i class="fas fa-trash"></i> Delete
-                        </button>
-                      </slot>
-                    </footer>
-                  </div>
-                </div>
+              <template v-slot:edit-post="{ post }">
+                <button class="button is-warning" @click="updatePost(post)">
+                  <span class="icon is-small">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                  <span>Custom Edit</span>
+                </button>
+              </template>
+              <template v-slot:delete-post="{ post }">
+                <button class="button is-danger" @click="confirmDeletePost(post.id, post.title)">
+                  <span class="icon is-small">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                  <span>Delete</span>
+                </button>
               </template>
             </PostCard>
           </div>
@@ -207,34 +201,21 @@ loadData()
 }
 
 .button.is-primary {
-  background-color: #0B132B;
-  border-color: #0B132B;
-}
-
-.button.is-primary:hover {
-  background-color: #1C2541;
-  border-color: #1C2541;
+  background-color: #209CEE;
+  border-color: #209CEE;
 }
 
 .button.is-warning {
-  background-color: #1C2541;
-  border-color: #1C2541;
-  color: #FAF6F6;
-}
-
-.button.is-warning:hover {
-  background-color: #0B132B;
-  border-color: #0B132B;
+  background-color: #F5A623;
+  border-color: #F5A623;
 }
 
 .button.is-danger {
-  background-color: #1C2541;
-  border-color: #1C2541;
-  color: #FAF6F6;
+  background-color: #FF3860;
+  border-color: #FF3860;
 }
 
-.button.is-danger:hover {
-  background-color: #0B132B;
-  border-color: #0B132B;
+.button .icon {
+  margin-right: 0.5rem;
 }
 </style>

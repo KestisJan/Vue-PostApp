@@ -125,6 +125,8 @@ const formatDate = (dateString: string): string => {
 .button {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
+  color: #FAF6F6;
 }
 
 .button.is-info {

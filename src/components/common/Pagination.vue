@@ -95,12 +95,10 @@ watch (
 
 .button {
     margin: 0 0.5rem;
-    background-color: #1C2541;
     border-color: #1C2541;
 }
 
 .button:hover {
-    border-color: #0B132B;
 }
 
 .page-info {

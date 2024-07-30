@@ -36,9 +36,9 @@ const validate = () => {
 
 
 <template>
-    <div>
-        <h3>Create Post</h3>
-        <form v-on:submit.prevent="createNewAuthor">
+    <div class="form-container">
+        <h3 class="form-title">Create Post</h3>
+        <form v-on:submit.prevent="createNewPost">
             <input
                 type="text"
                 v-model="title"
@@ -54,9 +54,68 @@ const validate = () => {
                 maxlength="50"
             />
             <button type="submit" class="submit-button">Create</button>
-            <ul v-if="validationMessage.length">
+            <ul v-if="validationMessage.length" class="validation-messages">
                 <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
             </ul>
         </form>
     </div>
 </template>
+
+
+
+<style scoped>
+.form-container {
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: #FAF6F6;
+    border: 1px solid #1C2541;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-title {
+    color: #0B132B;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.input-field {
+    border: 1px solid #1C2541;
+    border-radius: 4px;
+    color: #0B132B;
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.input-field::placeholder {
+    color: #1C2541;
+}
+
+.submit-button {
+    background-color: #1C2541;
+    border: none;
+    border-radius: 4px;
+    color: #FAF6F6;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0B132B;
+}
+
+.validation-messages {
+    margin-top: 1rem;
+    color: #FF6F6F;
+    font-size: 0.875rem;
+    list-style-type: none;
+    padding: 0;
+}
+
+.validation-messages li {
+    margin-bottom: 0.5rem;
+}
+</style>

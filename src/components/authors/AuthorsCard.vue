@@ -38,7 +38,7 @@ const formatDate = (dateString: string): string => {
                       </p>
                   </div>
                   <footer class="card-footer">
-                    <slot name="edit-post" :post="post">
+                    <slot name="edit-author" :author="author">
                       <button class="button is-warning" @click="defaultAction(post.id)">
                         <span class="icon is-small">
                           <i class="fas fa-edit"></i>
@@ -46,7 +46,7 @@ const formatDate = (dateString: string): string => {
                         <span>Edit</span>
                       </button>
                     </slot>
-                    <slot name="delete-post" :post="post">
+                    <slot name="delete-author" :author="author">
                       <button class="button is-danger" @click="defaultAction(post.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
@@ -99,7 +99,7 @@ const formatDate = (dateString: string): string => {
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-top: 1px solid #34495e; /* Slightly lighter border */
+  border-top: 1px solid #34495e;
 }
 
 .button {
