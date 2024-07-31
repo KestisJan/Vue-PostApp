@@ -3,6 +3,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useCurrentUserStore } from '@/stores/CurrentUserStore';
 
+const emit = defineEmits(['close'])
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -11,58 +12,46 @@ const currentUser = useCurrentUserStore()
 const router = useRouter()
 const validationMessage = ref<string[]>([]);
 
-
 const register = async () => {
     validate()
 
-    if (validationMessage.value.length === 0 && (await currentUser.register(email.value, password.value, name.value))
-
-    ) {
-        router.push('/').then(() => {
-            window.location.reload()
-        });
+    if (validationMessage.value.length === 0 && (await currentUser.register(email.value, password.value, name.value))) {
+        router.push('/')
+        emit('close')
     }
-
 }
 
 const validate = () => {
     validationMessage.value = [];
 
-    const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailRegex = 
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const nameRegex = /^(\p{L}+(?: \p{L}+)*)$/u
 
-
-    if (!nameRegex.test(name.value) && name.value !== '') {
-        validationMessage.value.push('Name may only contain letters separated by spaces.')
-    }
-    if (name.value === '') {
+    if (!name.value) {
         validationMessage.value.push('Name must not be empty!')
+    } else if (!nameRegex.test(name.value)) {
+        validationMessage.value.push('Name may only contain letters separated by spaces.')
     }
 
     if (name.value.length > 100) {
         validationMessage.value.push('Name must not be longer than 100 characters!')
     }
 
-
     if (!email.value) {
         validationMessage.value.push('Email may not be empty!')
-    }
-
-    if (!email.value && !emailRegex.test(email.value)) {
+    } else if (!emailRegex.test(email.value)) {
         validationMessage.value.push('Please enter a valid email!')
-    } 
+    }
 
     if (email.value.length > 200) {
         validationMessage.value.push('Email must not be longer than 200 characters!')
     }
 
     if (!password.value) {
-        validationMessage.value.push('PAssword may not be empty')
-    }
-
-    if (password.value && password.value.length < 4) {
+        validationMessage.value.push('Password may not be empty')
+    } else if (password.value.length < 4) {
         validationMessage.value.push('Password may not be shorter than 4 characters!')
     }
 
@@ -72,17 +61,20 @@ const validate = () => {
 
     if (!confirmPassword.value) {
         validationMessage.value.push('Repeat Password may not be empty!')
-    }
-
-    if (confirmPassword.value.length > 100) {
+    } else if (confirmPassword.value.length > 100) {
         validationMessage.value.push('Repeat Password must not be longer than 100 characters!')
     }
 
     if (password.value && confirmPassword.value && password.value !== confirmPassword.value) {
         validationMessage.value.push('Passwords must match!')
     }
-}
 
+    if (validationMessage.value.length > 0) {
+        setTimeout(() => {
+            validationMessage.value = [];
+        }, 5000); 
+    }
+}
 </script>
 
 <template>
@@ -91,7 +83,7 @@ const validate = () => {
             <h1 class="title has-text-centered">
                 <i class="fas fa-user-plus"></i> Register
             </h1>
-            <form class="form">
+            <form @submit.prevent="register" class="form">
                 <div class="field">
                     <div class="control has-icons-left">
                         <input 
@@ -145,7 +137,7 @@ const validate = () => {
                     </div>
                 </div>
                 <div class="field">
-                    <button class="button is-fullwidth is-primary" @click="register">
+                    <button class="button is-fullwidth is-primary" type="submit">
                         <i class="fas fa-user-plus"></i> Register
                     </button>
                     <ul v-if="validationMessage.length" class="has-text-danger mt-2">

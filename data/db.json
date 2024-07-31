@@ -11,6 +11,30 @@
       "password": "$2a$10$yHbh/ccYsWVsSwY47Iax4uAvNwvXlhtQYFsi27CNMgu5VpqJBbdau",
       "name": "Ben",
       "id": 2
+    },
+    {
+      "email": "bandymas@gmail.com",
+      "password": "$2a$10$Z.z2yIYOmCvZWztHEccmpeHMnA3EjDRz/R9z6k9Lq1FU1JdgG92ZC",
+      "name": "Bandymas",
+      "id": 3
+    },
+    {
+      "email": "testas2@gmail.com",
+      "password": "$2a$10$hPZLfi5kHR1AJL/0XDP0UeRMXx0IpddznIr9.5DdKyPP3WTDFWdZm",
+      "name": "testas",
+      "id": 4
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$PkHpv9e2LBJ5qh0iJxEsyuGto/B0SBcDrWGebzeJ6opvlvYmGg7pW",
+      "name": "test",
+      "id": 6
+    },
+    {
+      "email": "email@gmail.com",
+      "password": "$2a$10$exGbetixUIuBKePa69Da2.5.FWkn2qY/5b5O2LR7mrucwtZRq4eAW",
+      "name": "name",
+      "id": 7
     }
   ],
   "authors": [
