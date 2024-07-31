@@ -91,9 +91,7 @@ const validate = () => {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #FAF6F6;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {

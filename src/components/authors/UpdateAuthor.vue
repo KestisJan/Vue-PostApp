@@ -74,35 +74,97 @@ fetchAuthors()
 
 
 <template>
-    <div class="box">
-        <h3 class="title is-4">Update Author</h3>
-        <form @submit.prevent="editAuthor">
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                    <input
-                        type="text"
-                        v-model="name"
-                        @keyup="touched = true"
-                        class="input"
-                        maxlength="50"
-                        placeholder="Enter name"
-                    />
-                    <input
-                        type="text"
-                        v-model="surname"
-                        @keyup="touched = true"
-                        class="input"
-                        maxlength="50"
-                        placeholder="Enter surname"
-                    />
-                    <button type="submit" class="button">Update</button>
-                    <ul v-if="validationMessage.length">
-                        <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
-                    </ul>
-                </div>
-            </div>
-
+    <div class="container">
+        <h3 class="title">Update Author</h3>
+        <form @submit.prevent="editAuthor" class="form">
+            <input
+                type="text"
+                v-model="name"
+                @keyup="touched = true"
+                class="input-field"
+                maxlength="50"
+                placeholder="Enter name"
+            />
+            <input
+                type="text"
+                v-model="surname"
+                @keyup="touched = true"
+                class="input-field"
+                maxlength="50"
+                placeholder="Enter surname"
+            />
+            <button type="submit" class="submit-button">Update</button>
+            <ul v-if="validationMessage.length" class="validation-messages">
+                <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+            </ul>
         </form>
     </div>
 </template>
+
+
+<style scoped>
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.title {
+    color: #0B132B;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-field {
+    padding: 0.75rem;
+    border: 1px solid #1C2541;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #0B132B;
+    background-color: #FFFFFF;
+}
+
+.input-field::placeholder {
+    color: #B0B0B0;
+}
+
+.submit-button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0B132B;
+    color: #FAF6F6;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #1C2541;
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+}
+
+.validation-messages {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #FFE4E4;
+    border: 1px solid #FF4C4C;
+    border-radius: 4px;
+    color: #FF4C4C;
+    list-style: none;
+}
+
+.validation-messages li {
+    margin-bottom: 0.5rem;
+}
+</style>
