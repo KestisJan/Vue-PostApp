@@ -31,9 +31,7 @@ const validate = () => {
 
     if (!email.value) {
         validationMessage.value.push('Email may not be empty!')
-    }
-
-    if (!email.value && !emailRegex.test(email.value)) {
+    } else if (!emailRegex.test(email.value)) {
         validationMessage.value.push('Please enter a valid email!')
     } 
 
@@ -42,10 +40,8 @@ const validate = () => {
     }
 
     if (!password.value) {
-        validationMessage.value.push('PAssword may not be empty')
-    }
-
-    if (password.value && password.value.length < 4) {
+        validationMessage.value.push('Password may not be empty!')
+    } else if (password.value.length < 4) {
         validationMessage.value.push('Password may not be shorter than 4 characters!')
     }
 
@@ -63,7 +59,7 @@ const validate = () => {
         <h1 class="title has-text-centered">
           <i class="fas fa-sign-in-alt"></i> Login
         </h1>
-        <form class="form">
+        <form @submit.prevent="login" class="form">
           <div class="field">
             <div class="control has-icons-left">
               <input
@@ -92,7 +88,7 @@ const validate = () => {
           </div>
           <div class="field">
             <div class="control">
-              <button class="button is-primary is-fullwidth" @click="login">
+              <button class="button is-primary is-fullwidth" type="submit">
                 <i class="fas fa-sign-in-alt"></i> Login
               </button>
             </div>
