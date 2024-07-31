@@ -125,8 +125,8 @@ loadData()
   <div class="hero is-fullheight">
     <div class="hero-head">
       <div class="container has-text-centered">
-        <h1 class="title mt-4 has-text-white">Posts List</h1>
-        <button class="button is-primary mt-4 is-rounded" @click="createPost">
+        <h1 class="title mt-3 has-text-white">Posts List</h1>
+        <button class="button is-primary mt-3 is-rounded" @click="createPost">
           <span class="icon is-small">
             <i class="fas fa-plus"></i>
           </span>

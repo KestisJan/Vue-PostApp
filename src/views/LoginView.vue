@@ -59,106 +59,124 @@ const validate = () => {
 
 <template>
     <div class="container is-fluid is-fullwidth is-flex is-justify-content-center mt-6">
-       <div class="box" style="max-width: 400px; width: 100%;">
-            <h1 class="title has-text-centered">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </h1>
-            <form class="form">
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input
-                            type="text"
-                            class="input"
-                            placeholder="Email"
-                            v-model="email"
-                        />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input
-                            type="password"
-                            class="input"
-                            placeholder="Password"
-                            v-model="password"
-                        />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="field">
-                    <button class="button is-primary is-fullwidth" @click="login">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                    <ul v-if="validationMessage.length" class="has-text-danger mt-2">
-                        <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
-                    </ul>
-                </div>
-            </form>
-            <div class="field-bot has-text-centered mt-4">
-                <p>Don't have an account yet?</p>
-                <RouterLink to="/register" class="has-text-link">
-                    Register here
-                </RouterLink>
+      <div class="box">
+        <h1 class="title has-text-centered">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </h1>
+        <form class="form">
+          <div class="field">
+            <div class="control has-icons-left">
+              <input
+                type="text"
+                class="input"
+                placeholder="Email"
+                v-model="email"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
             </div>
-       </div> 
+          </div>
+          <div class="field">
+            <div class="control has-icons-left">
+              <input
+                type="password"
+                class="input"
+                placeholder="Password"
+                v-model="password"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary is-fullwidth" @click="login">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </button>
+            </div>
+            <ul v-if="validationMessage.length" class="has-text-danger mt-2">
+              <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
+            </ul>
+          </div>
+        </form>
+        <div class="field has-text-centered mt-4">
+          <p>Don't have an account yet?</p>
+          <RouterLink to="/register" class="has-text-link">
+            Register here
+          </RouterLink>
+        </div>
+      </div>
     </div>
-</template>
-
-<style scoped>
-.container {
-    margin-top: 3rem;
+  </template>
+  
+  
+  <style scoped>
+ .container {
+  padding: 10em;
 }
 
 .box {
-    background-color: #FAF6F6;
-    border-radius: 8px; 
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  background-color: #FAF6F6;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1.2); 
+  width: 500px;
+  padding: 4em;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+.box:hover {
+  transform: scale(1.02); /* Slightly increase the size */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add more shadow */
 }
 
 .title {
-    color: #0B132B;
+  color: #0B132B;
 }
 
 .input {
-    border-color: #1C2541; 
-    background-color: #FAF6F6; 
+  border-color: #1C2541; 
+  background-color: #FAF6F6; 
 }
 
 .button.is-primary {
-    background-color: #0B132B; 
-    border-color: #0B132B; 
-    color: #FAF6F6;
+  margin: 0;
+  margin-top: 2em;
+  background-color: #0B132B; 
+  border-color: #0B132B; 
+  color: #FAF6F6;
 }
 
 .button.is-primary:hover {
-    background-color: #1C2541; 
-    border-color: #1C2541; 
+  background-color: #1C2541; 
+  border-color: #1C2541; 
 }
 
 .has-text-danger {
-    color: #d9534f; 
+  color: #d9534f; 
 }
 
 .field-bot {
-    margin-top: 1rem;
-    color: #0B132B; 
+  color: #0B132B; 
 }
 
 .has-text-link {
-    color: #1C2541;
+  color: #1C2541;
 }
 
 .has-text-link:hover {
-    color: #0B132B; 
+  color: #0B132B; 
 }
 
 .icon.is-small.is-left {
-    color: #0B132B; 
+  color: #0B132B; 
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
 }
-</style>
+
+.control {
+  width: 100%;
+}
+  </style>

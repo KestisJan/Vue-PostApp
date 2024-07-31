@@ -136,12 +136,14 @@ loadData()
     <div class="hero-head">
       <div class="container has-text-centered">
         <h1 class="title mt-4 has-text-white">Authors List</h1>
-        <button class="button is-primary mt-4 is-rounded" @click="createAuthor">
-          <span class="icon is-small">
-            <i class="fas fa-plus"></i>
-          </span>
-          <span class="ml-1">Add New Author</span>
-        </button>
+        <div class="button-container">
+          <button class="button is-primary mt-4 is-rounded" @click="createAuthor">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+            <span class="ml-1">Add New Author</span>
+          </button>
+        </div>
         <Search @search="handleSearch"/>
       </div>
     </div>
@@ -202,10 +204,15 @@ loadData()
   color: #0B132B;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .button {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   color: #FAF6F6;
 }
 
@@ -214,8 +221,8 @@ loadData()
 }
 
 .button.is-primary {
-  background-color: #0B132B;
-  border-color: #0B132B;
+  background-color: #209CEE;
+  border-color: #209CEE;
 }
 
 .button.is-primary:hover {

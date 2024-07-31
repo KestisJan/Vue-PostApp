@@ -46,13 +46,12 @@ const validate = () => {
                 class="input-field"
                 maxlength="50"
             />
-            <input 
-                type="text"
+            <textarea
                 v-model="body"
                 placeholder="Body"
-                class="input-field"
-                maxlength="50"
-            />
+                class="textarea-field"
+                maxlength="250"
+            ></textarea>
             <button type="submit" class="submit-button">Create</button>
             <ul v-if="validationMessage.length" class="validation-messages">
                 <li v-for="(message, index) in validationMessage" :key="index">{{ message }}</li>
@@ -91,6 +90,18 @@ const validate = () => {
 
 .input-field::placeholder {
     color: #1C2541;
+}
+
+.textarea-field {
+    border: 1px solid #1C2541;
+    border-radius: 4px;
+    color: #0B132B;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    resize: vertical;
 }
 
 .submit-button {

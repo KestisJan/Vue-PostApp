@@ -165,14 +165,24 @@ const validate = () => {
 
 <style scoped>
 .container {
-    margin-top: 50px;
+    padding: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .box {
     background-color: #FAF6F6; 
     border-radius: 8px; 
     padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, .5); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    max-width: 500px;
+}
+
+.box:hover {
+    transform: scale(1.02); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
 }
 
 .title {
@@ -185,6 +195,8 @@ const validate = () => {
 }
 
 .button.is-primary {
+    margin: 0;
+    margin-top: 2em;
     background-color: #0B132B; 
     border-color: #0B132B; 
     color: #FAF6F6;
