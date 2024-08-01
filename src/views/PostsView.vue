@@ -130,12 +130,15 @@ loadData()
     <div class="hero-head">
       <div class="container has-text-centered">
         <h1 class="title mt-3 has-text-white">Posts List</h1>
-        <button class="button is-primary mt-3 is-rounded" @click="createPost">
-          <span class="icon is-small">
-            <i class="fas fa-plus"></i>
-          </span>
-          <span class="ml-1">Add New Post</span>
-        </button>
+
+        <template v-if="currentUserStore.currentUser">
+          <button class="button is-primary mt-3 is-rounded" @click="createPost">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+            <span class="ml-1">Add New Post</span>
+          </button>
+        </template>
         <Search :searchField="searchFields" @search="handleSearch"/>
       </div>
     </div>
