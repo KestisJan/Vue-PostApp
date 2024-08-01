@@ -41,16 +41,16 @@ const validate = () => {
         validationMessage.value.push('Post title must not be empty!')
     }
 
-    if (title.value.length > 50) {
-        validationMessage.value.push('Title length may not be longer than 50 characters.')
+    if (title.value.length > 100) {
+        validationMessage.value.push('Title length may not be longer than 100 characters.')
     }
 
     if (body.value.trim() === '') {
         validationMessage.value.push('Post body must not be empty!')
     }
 
-    if (body.value.length > 300) {
-        validationMessage.value.push('Body length may not be longer than 300 characters.')
+    if (body.value.length > 1000) {
+        validationMessage.value.push('Body length may not be longer than 1000 characters.')
     }
 
     if (validationMessage.value.length > 0) {

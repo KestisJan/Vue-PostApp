@@ -33,7 +33,7 @@ const validate = () => {
 
     if (!title.value.trim()) {
         validationMessage.value.push('Title is required.')
-    }
+    } 
 
     if (!authorId.value) {
         validationMessage.value.push('Author is required.')
@@ -41,6 +41,14 @@ const validate = () => {
 
     if (!body.value) {
         validationMessage.value.push('Body is required')
+    }
+
+    if (title.value.length > 100) {
+        validationMessage.value.push('Title must not be longer than 100 characters.')
+    }
+
+    if (title.value.length > 1000) {
+        validationMessage.value.push('Body must not be longer than 1000 characters.')
     }
 
     if (validationMessage.value.length > 0) {
