@@ -4,7 +4,7 @@ export interface IPost {
     body?: string
     authorId?: number
     userId?: number
-    created_at?: Date
-    updated_at?: Date
+    created_at?: string
+    updated_at?: string
   }
   

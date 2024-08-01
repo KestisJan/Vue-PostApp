@@ -61,9 +61,10 @@ export const usePostsStore = defineStore('posts-store', () => {
         const postToAdd: IPost = {
            title,
            body,
-           authorId
+           authorId,
+           created_at: new Date().toISOString()
         }
-
+        console.log('test', postToAdd)
         try {
             const response = await axiosService.postData('/posts', JSON.stringify(postToAdd))
             notificationStore.success('Added Post successfully!')
