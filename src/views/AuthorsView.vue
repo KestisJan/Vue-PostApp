@@ -153,20 +153,24 @@ loadData()
         <div v-else>
           <AuthorsCard :authors="authors">
             <template v-slot:edit-author="{ author }">
-              <button class="button is-warning" @click="updateAuthor(author.id)">
-                <span class="icon is-small">
-                  <i class="fas fa-edit"></i>
-                </span>
-                <span>Edit</span>
-              </button>
+              <template v-if="currentUserStore.currentUser">
+                <button class="button is-warning" @click="updateAuthor(author.id)">
+                  <span class="icon is-small">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                  <span>Edit</span>
+                </button>
+              </template>
             </template>
             <template v-slot:delete-author="{ author }">
-              <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">
-                <span class="icon is-small">
-                  <i class="fas fa-trash"></i>
-                </span>
-                <span>Delete</span>
-              </button>
+              <template v-if="currentUserStore.currentUser">
+                <button class="button is-danger" @click="confirmDeleteAuthor(author.id, author.name, author.surname)">
+                  <span class="icon is-small">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                  <span>Delete</span>
+                </button>
+              </template>
             </template>
           </AuthorsCard>
         </div>

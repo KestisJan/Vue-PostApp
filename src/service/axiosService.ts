@@ -68,7 +68,7 @@ export default {
 
     async postData(endpoint: string, data: any) {
         try {
-            const response = await axios.post(endpoint, JSON.stringify(data), {
+            const response = await axios.post(endpoint, data, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

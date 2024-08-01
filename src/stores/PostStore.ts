@@ -51,7 +51,7 @@ export const usePostsStore = defineStore('posts-store', () => {
         }
     }
 
-    const addPost = async (posts: IPost) => {
+    const addPost = async (title: string, body: string, authorId: number) => {
         const currentUserStore = useCurrentUserStore()
 
         if (!currentUserStore.currentUser) {
@@ -59,11 +59,9 @@ export const usePostsStore = defineStore('posts-store', () => {
         }
 
         const postToAdd: IPost = {
-            title: posts.title,
-            body: posts.body,
-            authorId: posts.authorId,
-            userId: currentUserStore.currentUser.id,
-            created_at: new Date()
+           title,
+           body,
+           authorId
         }
 
         try {
@@ -104,7 +102,7 @@ export const usePostsStore = defineStore('posts-store', () => {
 
     const deletePost = async (id: number) => {
         const currentUserStore = useCurrentUserStore()
-
+        
         if (!currentUserStore.currentUser) {
             throw Error("Can't delete author, because you're currently not logged in.")
         }

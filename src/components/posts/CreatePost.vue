@@ -1,29 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { usePostsStore } from '@/stores/PostStore';
+import { useAuthorsStore } from '@/stores/AuthorStore';
 
 const emit = defineEmits(['close'])
 const props = defineProps<{ callbackfn: () => void}>()
-
+const authorStore = useAuthorsStore()
 const postStore = usePostsStore()
 const title = ref('')
 const body = ref('')
+const authorId = ref('')
 const validationMessage = ref<string[]>([]) 
 
-const createNewAuthor = () => {
+const createNewPost = () => {
     validate()
 
     if (validationMessage.value.length === 0) {
-        postStore.addPost(title.value, body.value)
-        props.callbackfn
+        postStore.addPost(title.value, body.value, authorId.value)
+        props.callbackfn()
         emit('close')
     }
 }
+
+onMounted(async () => {
+    await authorStore.fetchAuthors();
+})
 
 
 
 const validate = () => {
     validationMessage.value = [];
+
+    if (!title.value.trim()) {
+        validationMessage.value.push('Title is required.')
+    }
+
+    if (!authorId.value) {
+        validationMessage.value.push('Author is required.')
+    }
+
+    if (!body.value) {
+        validationMessage.value.push('Body is required')
+    }
 
     if (validationMessage.value.length > 0) {
         setTimeout(() => {
@@ -46,6 +64,12 @@ const validate = () => {
                 class="input-field"
                 maxlength="50"
             />
+            <select v-model="authorId" class="select-field" >
+                <option disabled value="">Select Author</option>
+                <option v-for="author in authorStore.authors" :key="author.id" :value="author.id" >
+                    {{ author.name }} {{ author.surname }}
+                </option>
+            </select>
             <textarea
                 v-model="body"
                 placeholder="Body"
@@ -78,7 +102,8 @@ const validate = () => {
     margin-bottom: 1rem;
 }
 
-.input-field {
+.input-field,
+.select-field {
     border: 1px solid #1C2541;
     border-radius: 4px;
     color: #0B132B;
@@ -88,8 +113,21 @@ const validate = () => {
     font-size: 1rem;
 }
 
-.input-field::placeholder {
+.input-field::placeholder,
+.select-field::placeholder {
     color: #1C2541;
+}
+
+.select-field {
+    background-color: #FAF6F6;
+    appearance: none;
+    padding-right: 2rem;
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+}
+
+.select-field:focus {
+    border-color: #3273DC;
 }
 
 .textarea-field {

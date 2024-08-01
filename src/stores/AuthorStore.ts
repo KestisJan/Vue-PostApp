@@ -44,8 +44,8 @@ export const useAuthorsStore = defineStore('authors-store', () => {
 
     const addAuthor = async (name: string, surname: string) => {
         const currentUserStore = useCurrentUserStore()
-
         if (!name || !surname) throw Error('Failed to add author, empty name or surname.')
+
 
         const author: IAuthor = {
             name: name,
@@ -53,6 +53,7 @@ export const useAuthorsStore = defineStore('authors-store', () => {
             userId: currentUserStore.currentUser.id,
             created_at: new Date()
         }
+
 
         try {
             const response = await axiosService.postData('/authors', JSON.stringify(author));
@@ -87,7 +88,7 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
     }
 
-    const deleteAuthor = async (author: IAuthor) => {
+    const deleteAuthor = async (id: number) => {
         const currentUserStore = useCurrentUserStore()
 
         if (!currentUserStore.currentUser) {
@@ -95,12 +96,11 @@ export const useAuthorsStore = defineStore('authors-store', () => {
         }
 
         try {
-            if (!author) throw Error('Failed to update author, no author provided')
-            if (!author.id) throw Error('Failed to delete author, author must have an id')
+            if (!id) throw Error('Failed to delete author, author must have an id')
+            
+            const response = await axiosService.deleteData('/authors', id)
 
-            const response = await axiosService.deleteData('/authors', author.id)
-
-            notificationStore.success(`Deleted author ${author.id} ${author.name} ${author.surname}`)
+            notificationStore.success(`Deleted author`)
 
             return response;
         } catch (err: any) {

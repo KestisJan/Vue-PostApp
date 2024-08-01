@@ -2,11 +2,12 @@
 import {ref} from 'vue'
 import { usePostsStore } from '@/stores/PostStore';
 import { type IPostAuthor } from '@/interface/IPostAuthor';
-import { useRoute, RouterLink } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const postStore = usePostsStore()
 const postWithAuthor = ref<IPostAuthor | null>(null)
 const route = useRoute()
+const router = useRouter()
 
 
 const formatDate = (dateString: string): string => {
@@ -26,9 +27,12 @@ const loadData = async () => {
     }
 }
 
+const goBack = () => {
+  router.back();
+}
+
 loadData()
 
-console.log(postWithAuthor)
 </script>
 
 
@@ -36,7 +40,7 @@ console.log(postWithAuthor)
     <div class="container">
       <div v-if="postWithAuthor" class="box">
         <div class="header">
-          <RouterLink to="/posts" class="back-link">Back</RouterLink>
+          <button @click="goBack" class="back-link">Back</button>
         </div>
         <div class="content">
           <div class="title">{{ postWithAuthor.title }}</div>

@@ -69,8 +69,8 @@ const updatePost = () => {
             post.value.title = title.value
             post.value.body = body.value
             postStore.updatePost(post.value)
-            props.callbackfn()
         }
+        props.callbackfn()
         emit('close')
     }
 }

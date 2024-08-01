@@ -2,6 +2,7 @@
 import { type IModalProps } from '@/interface/IModal';
 import { usePostsStore } from '@/stores/PostStore'
 import { useModalStore } from '@/stores/ModalStore';
+import { useCurrentUserStore } from '@/stores/CurrentUserStore';
 import { type IPost } from '@/interface/IPost';
 import { ref } from 'vue'
 import PostCard from '@/components/posts/PostsCard.vue'
@@ -14,6 +15,7 @@ import ConfirmationWindow from '@/components/common/ConfirmationWindow.vue';
 
 const postsStore = usePostsStore()
 const modalStore = useModalStore()
+const currentUserStore = useCurrentUserStore()
 const posts = ref<IPost[]>([]);
 const isLoading = ref(true)
 const currentPage = ref(1)
@@ -22,7 +24,9 @@ const itemCount = ref(0);
 const query = ref('')
 
 
-const loadData = async (page: number, limit: number) => {
+
+
+const loadData = async () => {
     isLoading.value = true
     posts.value = []
 
@@ -57,7 +61,7 @@ const handlePagination = ({ page, limit}: { page:number; limit: number}) => {
 const handleSearch = (searchParams: { [key: string]: string }) => {
     query.value = searchParams;
     currentPage.value = 1
-    loadData(currentPage.value, itemsPerPage.value)
+    loadData()
 }
 
 
@@ -142,20 +146,24 @@ loadData()
           <div class="columns is-multiline">
             <PostCard :posts="posts">
               <template v-slot:edit-post="{ post }">
-                <button class="button is-warning" @click="updatePost(post)">
-                  <span class="icon is-small">
-                    <i class="fas fa-edit"></i>
-                  </span>
-                  <span>Custom Edit</span>
-                </button>
+                <template v-if="currentUserStore.currentUser">
+                  <button class="button is-warning" @click="updatePost(post.id)">
+                    <span class="icon is-small">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <span>Edit</span>
+                  </button>
+                </template>
               </template>
               <template v-slot:delete-post="{ post }">
-                <button class="button is-danger" @click="confirmDeletePost(post.id, post.title)">
-                  <span class="icon is-small">
-                    <i class="fas fa-trash"></i>
-                  </span>
-                  <span>Delete</span>
-                </button>
+                <template v-if="currentUserStore.currentUser">
+                  <button class="button is-danger" @click="confirmDeletePost(post.id, post.title)">
+                    <span class="icon is-small">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                    <span>Delete</span>
+                  </button>
+                </template>
               </template>
             </PostCard>
           </div>

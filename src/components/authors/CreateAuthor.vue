@@ -15,7 +15,7 @@ const createNewAuthor = () => {
 
     if (validationMessage.value.length === 0) {
         authorStore.addAuthor(name.value, surname.value)
-        props.callbackfn
+        props.callbackfn()
         emit('close')
     }
 }
