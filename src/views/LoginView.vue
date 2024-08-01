@@ -8,7 +8,7 @@ const password = ref('')
 const currentUser = useCurrentUserStore()
 const router = useRouter()
 const validationMessage = ref<string[]>([]);
-
+const emit = defineEmits(['close'])
 
 const login = async () => {
     validate()
@@ -16,9 +16,8 @@ const login = async () => {
     if (validationMessage.value.length === 0 && (await currentUser.login(email.value, password.value))
 
     ) {
-        router.push('/').then(() => {
-            window.location.reload()
-        });
+      router.push('/')
+      emit('close')
     }
 
 }

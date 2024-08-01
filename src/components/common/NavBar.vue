@@ -1,35 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
 import { useCurrentUserStore } from '@/stores/CurrentUserStore';
 import { useRouter } from 'vue-router';
 
 const currentUserStore = useCurrentUserStore();
 const router = useRouter();
 
-const userName = ref<string | null>(null);
+const user = currentUserStore.currentUser
 
-const getUserFromLocalStorage = () => {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
-}
-
-const initializeUserInfo = () => {
-    const user = getUserFromLocalStorage();
-
-    if (user) {
-        userName.value = user.name;
-    } else {
-        userName.value = null
-    }
-}
-
-onMounted(() => {
-    initializeUserInfo();
-})
 
 const logout = async () => {
     await currentUserStore.logout();
-    userName.value = null;
     router.push('/login');
 }
 
@@ -57,7 +37,7 @@ const logout = async () => {
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <template v-if="!userName">
+              <template v-if="!currentUserStore.currentUser">
                 <router-link class="button is-primary" to="/register">
                   <strong>Register</strong>
                 </router-link>
@@ -65,12 +45,12 @@ const logout = async () => {
                   Log in
                 </router-link>
               </template>
-                <template v-if="userName">
+                <template v-if="currentUserStore.currentUser">
                     <div class="navbar-item user-info">
                         <span class="icon is-small">
-                        <i class="fas fa-user"></i> <!-- User icon -->
+                        <i class="fas fa-user"></i> 
                         </span>
-                        <span class="username">{{ userName }}</span>
+                        <span class="username">{{ user.name }}</span>
                         <button class="button is-danger logout-button" @click="logout">
                         Log out
                         </button>
