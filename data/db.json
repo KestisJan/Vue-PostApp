@@ -1,0 +1,144 @@
+{
+  "users": [
+    {
+      "email": "regular@notreal.com",
+      "password": "$2a$10$wrSOb2J7qq1QDNmovvT34OIReYBv6aTvD9gnb6BzsGy5AY.yAGBru",
+      "name": "Regular user",
+      "id": 1
+    },
+    {
+      "email": "ben@gmail.com",
+      "password": "$2a$10$yHbh/ccYsWVsSwY47Iax4uAvNwvXlhtQYFsi27CNMgu5VpqJBbdau",
+      "name": "Ben",
+      "id": 2
+    },
+    {
+      "email": "bandymas@gmail.com",
+      "password": "$2a$10$Z.z2yIYOmCvZWztHEccmpeHMnA3EjDRz/R9z6k9Lq1FU1JdgG92ZC",
+      "name": "Bandymas",
+      "id": 3
+    },
+    {
+      "email": "testas2@gmail.com",
+      "password": "$2a$10$hPZLfi5kHR1AJL/0XDP0UeRMXx0IpddznIr9.5DdKyPP3WTDFWdZm",
+      "name": "testas",
+      "id": 4
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$PkHpv9e2LBJ5qh0iJxEsyuGto/B0SBcDrWGebzeJ6opvlvYmGg7pW",
+      "name": "test",
+      "id": 6
+    },
+    {
+      "email": "email@gmail.com",
+      "password": "$2a$10$exGbetixUIuBKePa69Da2.5.FWkn2qY/5b5O2LR7mrucwtZRq4eAW",
+      "name": "name",
+      "id": 7
+    }
+  ],
+  "authors": [
+    {
+      "id": 2,
+      "name": "Jane",
+      "surname": "Smith",
+      "userId": 1,
+      "created_at": "2024-05-05T12:00:00Z",
+      "updated_at": "2024-05-05T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Michael",
+      "surname": "Johnson",
+      "userId": 1,
+      "created_at": "2024-05-05T12:00:00Z",
+      "updated_at": "2024-05-05T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Emily",
+      "surname": "Brown",
+      "userId": 1,
+      "created_at": "2024-05-05T12:00:00Z",
+      "updated_at": "2024-05-05T12:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "David",
+      "surname": "Wilson",
+      "userId": 1,
+      "created_at": "2024-05-05T12:00:00Z",
+      "updated_at": "2024-05-05T12:00:00Z"
+    },
+    {
+      "name": "testas",
+      "surname": "new",
+      "userId": 6,
+      "created_at": "2024-08-01T09:11:50.393Z",
+      "id": 6
+    }
+  ],
+  "posts": [
+    {
+      "id": 2,
+      "title": "Second Post",
+      "body": "This is the body of the second post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 2,
+      "userId": 1,
+      "created_at": "2024-05-05T12:01:00Z",
+      "updated_at": "2024-05-05T12:01:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Fourth Post",
+      "body": "This is the body of the fourth post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 4,
+      "userId": 1,
+      "created_at": "2024-05-05T12:03:00Z",
+      "updated_at": "2024-08-01T09:10:25.048Z"
+    },
+    {
+      "id": 5,
+      "title": "Fifth Post",
+      "body": "This is the body of the fifth post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 5,
+      "userId": 1,
+      "created_at": "2024-05-05T12:04:00Z",
+      "updated_at": "2024-05-05T12:04:00Z"
+    },
+    {
+      "id": 7,
+      "title": "Seventh Post",
+      "body": "This is the body of the seventh post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 2,
+      "userId": 1,
+      "created_at": "2024-05-05T12:06:00Z",
+      "updated_at": "2024-05-05T12:06:00Z"
+    },
+    {
+      "id": 8,
+      "title": "Eighth Post",
+      "body": "This is the body of the eighth post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 3,
+      "userId": 1,
+      "created_at": "2024-05-05T12:07:00Z",
+      "updated_at": "2024-05-05T12:07:00Z"
+    },
+    {
+      "id": 9,
+      "title": "Ninth Post",
+      "body": "This is the body of the ninth post. It contains more than twenty five words to fulfill the requirement of the task. This is just a filler text to meet the criteria.",
+      "authorId": 4,
+      "userId": 1,
+      "created_at": "2024-05-05T12:08:00Z",
+      "updated_at": "2024-05-05T12:08:00Z"
+    },
+    {
+      "title": "Test",
+      "body": "dasdasdasdas",
+      "authorId": 5,
+      "created_at": "2024-08-01T12:06:25.183Z",
+      "id": 10
+    }
+  ]
+}
